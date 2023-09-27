@@ -1,0 +1,51 @@
+/* Estilos para el footer */
+.footer_container {
+    background-color: #c9d8e3;
+    /* Color de fondo azul de Material UI */
+    color: #fff;
+    /* Texto blanco */
+    padding: 40px 0;
+    /* Mayor altura del footer */
+    text-align: center;
+    /* Centra el texto horizontalmente */
+}
+
+/* Estilos para los encabezados de las columnas */
+.footer_container h3 {
+    font-size: 1.5rem;
+    /* Tamaño de fuente aumentado */
+}
+
+/* Estilos para el párrafo del primer columna */
+.footer_container p {
+    font-size: 1rem;
+    /* Tamaño de fuente para el párrafo */
+}
+
+/* Estilos para los enlaces del footer */
+.footer_container a {
+    color: #fff;
+    /* Texto blanco para los enlaces */
+    text-decoration: none;
+}
+
+/* Estilos para la lista sin viñetas en las columnas */
+.footer_container ul.list-unstyled {
+    list-style: none;
+    /* Quita las viñetas de la lista */
+    padding: 0;
+}
+
+/* Estilos para los elementos de la lista */
+.footer_container ul.list-unstyled li {
+    margin-bottom: 0.5rem;
+    /* Espacio inferior entre elementos de la lista */
+}
+
+/* Estilos para el texto de derechos de autor */
+.footer_container p.text-center {
+    margin-top: 20px;
+    /* Espacio superior para el texto de derechos de autor */
+    font-size: 0.875rem;
+    /* Tamaño de fuente más pequeño para el texto de derechos de autor */
+}
