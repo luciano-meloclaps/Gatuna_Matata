@@ -4,6 +4,7 @@ import Row from "react-bootstrap/Row";
 import "./gridCard.css";
 
 function GridExample() {
+  
   return (
     <div className="grid_container">
       <Row xs={1} md={3} className="g-5">

@@ -1,6 +1,8 @@
 import "./App.css";
 
+
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
+
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -10,6 +12,7 @@ import Protected from "./components/protected/Protected";
 import { useState } from "react";
 
 function App() {
+
   const [isSignedIn, setIsSignedIn] = useState(false)
 
   const setSignedInHandler = (value) => {
@@ -27,6 +30,7 @@ function App() {
   ])
 
   return <RouterProvider router={router} />
+
 }
 
 export default App;
