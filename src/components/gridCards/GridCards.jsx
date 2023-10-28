@@ -4,17 +4,13 @@ import Row from "react-bootstrap/Row";
 import "./gridCard.css";
 
 function GridExample() {
-  
   return (
     <div className="grid_container">
       <Row xs={1} md={3} className="g-5">
         {Array.from({ length: 7 }).map((_, idx) => (
           <Col key={idx}>
             <Card>
-              <Card.Img
-                variant="top"
-                src="../gatuna_matata\public\hero_gatunaMatata.jpg"
-              />
+              <Card.Img variant="top" src="" />
               <Card.Body>
                 <Card.Title>Card title</Card.Title>
                 <Card.Text>
