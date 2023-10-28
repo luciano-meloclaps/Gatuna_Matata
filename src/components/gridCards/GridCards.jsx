@@ -5,8 +5,8 @@ import "./gridCard.css";
 
 function GridExample() {
   return (
-    <div className="grid_container">
-      <Row xs={1} md={3} className="g-5">
+    <div className="grid_container p-4 my-5">
+      <Row xs={1} md={3} className="g-5 p-1">
         {Array.from({ length: 7 }).map((_, idx) => (
           <Col key={idx}>
             <Card>
