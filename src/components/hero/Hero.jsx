@@ -1,6 +1,8 @@
 import "./hero.css";
+import { useNavigate } from 'react-router';
 
 const Hero = () => {
+  const navigateLoginHero = useNavigate();
   return (
     <div className="wave-container p-0">
       <div className="hero_container container  my-5">
@@ -19,6 +21,7 @@ const Hero = () => {
               <button
                 type="button"
                 className="btn btn-primary btn-lg px-5 me-md-2 fw-bold"
+                onClick={() => navigateLoginHero("/login")}
               >
                 Registrate!
               </button>
