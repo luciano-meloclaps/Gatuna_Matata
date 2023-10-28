@@ -26,14 +26,14 @@ const Login = ({ setSignedInHandler }) => {
   const onClickLogInHandler = (event) => {
     event.preventDefault();
     if (email.length === 0 || password.length === 0) {
-      /CAMBIAR VALIDACIONES/
+      //CAMBIAR VALIDACIONES/
       alert("Usuario inválido para registrarse");
       return;
     }
 
     setSignedInHandler(true); //funcion que pasamos por prop, cambiamos el valor a true así se puede loggear
 
-    navigate("/home"); //redirigimos al dashboard
+    navigate("/dashboard"); //redirigimos al dashboard
   };
 return (
     <div className="vh-100 d-flex align-items-center background">
