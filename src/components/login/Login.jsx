@@ -35,10 +35,11 @@ const Login = ({ setSignedInHandler }) => {
 
     navigate("/dashboard"); //redirigimos al dashboard
   };
-return (
+  return (
     <div className="vh-100 d-flex align-items-center background">
       <div className="container col-md-3 bg-light p-5 rounded">
         <Form>
+          <h1 class="font-marca text-center p-2">Gatuna Matata</h1>
           <h3 className="text-center">Login</h3>
           <p className="text-center">miau miau miau miau miau miau</p>
           <hr />

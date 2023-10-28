@@ -14,7 +14,7 @@ const Footer = () => {
             </svg>
           </a>
           <p class="text-muted">© 2021</p>
-          <h1>Gatuna Matata</h1>
+          <h1 class="font-marca">Gatuna Matata</h1>
         </div>
 
         <div class="col"></div>
