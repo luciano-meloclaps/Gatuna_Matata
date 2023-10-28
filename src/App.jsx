@@ -11,7 +11,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "./components/login/Login";
 import Dashboard from "./components/dashboard/Dashboard";
 import Protected from "./components/protected/Protected";
+import Landing from "./components/landing/Landing";
+
 import { useState } from "react";
+
+
 
 function App() {
   const [isSignedIn, setIsSignedIn] = useState(false);
@@ -22,13 +26,13 @@ function App() {
 
   const router = createBrowserRouter([
     //creo el browserRouter que contiene las rutas a los distintos componentes, la ruta general lleva al login(esto despues lo podemos cambiar)
-    { path: "/", element: <Navigate to="/login" /> },
+    { path: "/", element: <Landing />},
     {
       path: "/login",
       element: <Login setSignedInHandler={setSignedInHandler} />,
     }, //le pasamos la funcion asi una vez ingresa los datos correctamente cambia el valor de isSignedIn
     {
-      path: "/home",
+      path: "/dashboard",
       element: (
         <Protected isSignedIn={isSignedIn}>
           <Dashboard />
