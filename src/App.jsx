@@ -14,8 +14,7 @@ import Protected from "./components/protected/Protected";
 import Landing from "./components/landing/Landing";
 
 import { useState } from "react";
-
-
+import FormComponent from "./components/fom/Form";
 
 function App() {
   const [isSignedIn, setIsSignedIn] = useState(false);
@@ -26,7 +25,7 @@ function App() {
 
   const router = createBrowserRouter([
     //creo el browserRouter que contiene las rutas a los distintos componentes, la ruta general lleva al login(esto despues lo podemos cambiar)
-    { path: "/", element: <Landing />},
+    { path: "/", element: <Landing /> },
     {
       path: "/login",
       element: <Login setSignedInHandler={setSignedInHandler} />,

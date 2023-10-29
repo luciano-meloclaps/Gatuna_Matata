@@ -66,8 +66,8 @@ const Login = ({ setSignedInHandler }) => {
             className="mb-3"
             controlId="formBasicCheckbox"
           ></Form.Group>
-          <div className="d-grid gap-2">
-            <Button variant="primary" size="lg" onClick={onClickLogInHandler}>
+          <div className="d-grid gap-2 bg-blue">
+            <Button size="lg" onClick={onClickLogInHandler}>
               Inciar sesión
             </Button>
           </div>

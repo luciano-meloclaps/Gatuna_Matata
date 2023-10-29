@@ -6,6 +6,7 @@ import Hero from "../hero/Hero";
 import Navbar from "../navbar/Navbar";
 import Footer from "../footer/Footer";
 import GridExample from "../gridCards/GridCards";
+import FormComponent from "../fom/Form";
 
 const Landing = () => {
   return (
@@ -13,6 +14,7 @@ const Landing = () => {
       <Navbar />
       <Hero />
       <GridExample />
+      <FormComponent />
       <Footer />
     </>
   );

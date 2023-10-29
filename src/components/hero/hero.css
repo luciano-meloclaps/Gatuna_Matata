@@ -1,8 +1,9 @@
 .wave-container {
-    background-image: url("https://img.freepik.com/free-vector/purple-wavy-background_1035-8665.jpg?w=1380&t=st=1695849254~exp=1695849854~hmac=87b5e82b4c314361348f4854122de92eb8e0f6b84ff932a8dc97b9feb47736af");
+
+    background-image: url("src/images/wave (2).png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 100vh;
+    height: 80vh;
 
 }

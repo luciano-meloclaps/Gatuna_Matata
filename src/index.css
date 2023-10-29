@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Agbalumo&family=Poppins:wght@400;600&display=swap');
 
-
 :root {
     --font-family-marca: 'Agbalumo', sans-serif;
     --font-family-title: 'Poppins', sans-serif;
+    --color-pink: #E7C6FF;
+    --color-blue: #BBD0FF;
 }
-
 
 body {
     margin: 0;
@@ -20,4 +20,20 @@ body {
 .font-title {
     font-family: var(--font-family-title);
     font-weight: 600;
+}
+
+.bg-pink {
+    background-color: var(--color-pink);
+}
+
+.bg-blue {
+    background-color: var(--color-blue);
+}
+
+.color-pink {
+    color: var(--color-pink);
+}
+
+.color-blue {
+    color: var(--color-blue);
 }

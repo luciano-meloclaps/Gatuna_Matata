@@ -1,10 +1,10 @@
 import "./hero.css";
-import { useNavigate } from 'react-router';
+import { useNavigate } from "react-router";
 
 const Hero = () => {
   const navigateLoginHero = useNavigate();
   return (
-    <div className="wave-container p-0">
+    <div className="wave-container">
       <div className="hero_container container  my-5">
         <div className="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center">
           <div className="col-lg-7 p-3 p-lg-5 pt-lg-3">
@@ -19,8 +19,7 @@ const Hero = () => {
             </p>
             <div className="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
               <button
-                type="button"
-                className="btn btn-primary btn-lg px-5 me-md-2 fw-bold"
+                className="btn bg-blue btn-lg px-5 me-md-2 fw-bold"
                 onClick={() => navigateLoginHero("/login")}
               >
                 Registrate!
