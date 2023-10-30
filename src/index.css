@@ -3,8 +3,11 @@
 :root {
     --font-family-marca: 'Agbalumo', sans-serif;
     --font-family-title: 'Poppins', sans-serif;
-    --color-pink: #E7C6FF;
-    --color-blue: #BBD0FF;
+    --text: #0e0b0e;
+    --background: #f3f1f4;
+    --primary: #ebbdd7;
+    --secondary: #ca96cf;
+    --accent: #99008c;
 }
 
 body {
@@ -22,18 +25,67 @@ body {
     font-weight: 600;
 }
 
-.bg-pink {
-    background-color: var(--color-pink);
+/*BG Colors*/
+.bg-black {
+    background-color: var(--text);
 }
 
-.bg-blue {
-    background-color: var(--color-blue);
+.bg-background {
+    background-color: var(--background);
 }
 
-.color-pink {
-    color: var(--color-pink);
+.bg-secondary {
+    background-color: var(--secondary);
 }
 
-.color-blue {
-    color: var(--color-blue);
+.bg-primary{
+    background-color: var(--primary);
+}
+
+.bg-accent{
+    background-color: var(----accent);
+}
+
+
+
+/*BG VARIABLES*/
+.bg-black {
+    background-color: var(--text);
+}
+
+.bg-background {
+    background-color: var(--background);
+}
+
+.bg-secondary {
+    background-color: var(--secondary);
+}
+
+.bg-primary{
+    background-color: var(--primary);
+}
+
+.bg-accent{
+    background-color: var(----accent);
+}
+
+/*BG VARIABLES*/
+.color-black {
+    color: var(--text);
+}
+
+.color-background {
+    color: var(--background);
+}
+
+.color-secondary {
+    color: var(--secondary);
+}
+
+.color-primary{
+    color: var(--primary);
+}
+
+.color-accent{
+    color: var(----accent);
 }

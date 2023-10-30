@@ -8,7 +8,7 @@ function NavScrollExample() {
   const navigateLogin = useNavigate();
 
   return (
-    <Navbar expand="lg" className="navbar_container p-3 bg-pink sticky-top">
+    <Navbar expand="lg" className="navbar_container p-3 bg-primary sticky-top">
       <Container fluid>
         <Navbar.Brand className="mx-5 fs-3 text-white font-marca" href="#">
           Gatuna Matata

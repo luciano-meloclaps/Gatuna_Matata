@@ -39,11 +39,11 @@ const Login = ({ setSignedInHandler }) => {
     <div className="vh-100 d-flex align-items-center background">
       <div className="container col-md-3 bg-light p-5 rounded">
         <Form>
-          <h1 class="font-marca text-center p-2">Gatuna Matata</h1>
-          <h3 className="text-center">Login</h3>
-          <p className="text-center">miau miau miau miau miau miau</p>
+          <h1 class="font-marca text-center color-blue p-2">Gatuna Matata</h1>
+          
+          <p className="text-center ">miau miau miau miau miau miau</p>
           <hr />
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="my-3" controlId="formBasicEmail">
             <Form.Label>Email</Form.Label>
             <Form.Control
               type="email"
