@@ -21,7 +21,7 @@ const Form = () => {
     <div className="d-flex justify-content-center">
       <form
         onSubmit={handleSubmit}
-        className="p-5 m-5 bg-blue rounded-4"
+        className="p-5 m-5 bg-secondary rounded-4"
         style={{ maxWidth: "600px" }}
       >
         {/*EMAIl*/}
@@ -81,7 +81,7 @@ const Form = () => {
           </label>
         </div>
         {/*BUTTON*/}
-        <button type="submit" className="btn btn-lg bg-pink">
+        <button type="submit" className="btn btn-lg bg-primary">
           Submit
         </button>
       </form>
