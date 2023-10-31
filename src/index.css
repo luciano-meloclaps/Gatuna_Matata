@@ -25,67 +25,45 @@ body {
     font-weight: 600;
 }
 
-/*BG Colors*/
-.bg-black {
+
+/*BG VARIABLES*/
+.bg-black-user {
     background-color: var(--text);
 }
 
-.bg-background {
+.bg-background-user {
     background-color: var(--background);
 }
 
-.bg-secondary {
+.bg-secondary-user {
     background-color: var(--secondary);
 }
 
-.bg-primary{
+.bg-primary-user {
     background-color: var(--primary);
 }
 
-.bg-accent{
-    background-color: var(----accent);
+.bg-accent-user {
+    background-color: var(--accent);
 }
 
-
-
-/*BG VARIABLES*/
-.bg-black {
-    background-color: var(--text);
-}
-
-.bg-background {
-    background-color: var(--background);
-}
-
-.bg-secondary {
-    background-color: var(--secondary);
-}
-
-.bg-primary{
-    background-color: var(--primary);
-}
-
-.bg-accent{
-    background-color: var(----accent);
-}
-
-/*BG VARIABLES*/
-.color-black {
+/*COLOR VARIABLES*/
+.color-black-user {
     color: var(--text);
 }
 
-.color-background {
+.color-background-user {
     color: var(--background);
 }
 
-.color-secondary {
+.color-secondary-user {
     color: var(--secondary);
 }
 
-.color-primary{
+.color-primary-user {
     color: var(--primary);
 }
 
-.color-accent{
-    color: var(----accent);
+.color-accent-user {
+    color: var(--accent);
 }

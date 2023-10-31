@@ -37,11 +37,15 @@ const Login = ({ setSignedInHandler }) => {
   };
   return (
     <div className="vh-100 d-flex align-items-center background">
-      <div className="container col-md-3 bg-light p-5 rounded">
+      <div className="container col-md-3 bg-light p-5  bg-secondary-user rounded">
         <Form>
-          <h1 class="font-marca text-center color-blue p-2">Gatuna Matata</h1>
-          
-          <p className="text-center ">miau miau miau miau miau miau</p>
+          <h1 class="font-marca text-center color-accent-user p-2">
+            Gatuna Matata
+          </h1>
+
+          <p className="text-center color-secondary-user">
+            "miau miau miau miau miau miau"
+          </p>
           <hr />
           <Form.Group className="my-3" controlId="formBasicEmail">
             <Form.Label>Email</Form.Label>
@@ -66,8 +70,11 @@ const Login = ({ setSignedInHandler }) => {
             className="mb-3"
             controlId="formBasicCheckbox"
           ></Form.Group>
-          <div className="d-grid gap-2 bg-blue">
-            <Button size="lg" onClick={onClickLogInHandler}>
+          <div className="d-grid gap-2 ">
+            <Button
+              size=" btn bg-secondary-user text-white btn-lg px-5 me-md-2 fw-bold bx-2 border-0"
+              onClick={onClickLogInHandler}
+            >
               Inciar sesión
             </Button>
           </div>

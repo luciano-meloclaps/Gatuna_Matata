@@ -8,9 +8,12 @@ function NavScrollExample() {
   const navigateLogin = useNavigate();
 
   return (
-    <Navbar expand="lg" className="navbar_container p-3 bg-primary sticky-top">
+    <Navbar
+      expand="lg"
+      className="navbar_container p-3 bg-primary-user sticky-top"
+    >
       <Container fluid>
-        <Navbar.Brand className="mx-5 fs-3 text-white font-marca" href="#">
+        <Navbar.Brand className="mx-5 fs-2 text-white font-marca" href="#">
           Gatuna Matata
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
@@ -32,11 +35,11 @@ function NavScrollExample() {
             <Nav.Link className="mx-2 text-white fs-5" href="#action2">
               Contacto
             </Nav.Link>
-            <Nav.Link className="mx-2 text-white fs-5" href="#action2">
+            <Button variant="outline-light mx-4 lg btn-lg fw-bold">
               Iniciar Seccion
-            </Nav.Link>
+            </Button>{" "}
             <Button
-              className="mx-2 bg-blue "
+              className="btn bg-secondary-user text-white btn-lg px-5 me-md-2 fw-bold bx-2 border-0"
               onClick={() => navigateLogin("/login")}
             >
               Registrarte

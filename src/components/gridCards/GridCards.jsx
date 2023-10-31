@@ -2,16 +2,19 @@ import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
-function GridExample() {
+function GridCardsUser() {
   return (
-    <div class="grid_container p-4 ">
-      <h2 class="my-5 fs-2   color-blue text-center">
+    <div class="grid_container py-5 my-5 ">
+      <h2 class="my-5 fs-1 color-accent-user  text-center">
         Nuestros Clientes Satisfechos 😍{" "}
       </h2>
-      <Row xs={1} md={3} className="g-5 p-1">
-        {Array.from({ length: 7 }).map((_, idx) => (
+      <Row xs={1} md={3} className="g-5  row row-cols-md-4">
+        {Array.from({ length: 8 }).map((_, idx) => (
           <Col key={idx}>
-            <Card class="shadow-lg rounded-4 mx-5" style={{ maxWidth: "24rem" }}>
+            <Card
+              className="shadow-lg rounded-4 mx-5"
+              style={{ maxWidth: "24rem" }}
+            >
               <Card.Img
                 variant="top"
                 src="public\pngimg.com - cat_PNG50538.png"
@@ -35,4 +38,4 @@ function GridExample() {
   );
 }
 
-export default GridExample;
+export default GridCardsUser;
