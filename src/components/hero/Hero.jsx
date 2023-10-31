@@ -6,13 +6,13 @@ const Hero = () => {
   const navigateLoginHero = useNavigate();
   return (
     <div className="wave-container">
-      <div className="hero_container container my-5">
-        <div className="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center">
+      <div className="hero_container container p-5">
+        <div className="row  pb-0 pe-lg-0 pt-lg-5 align-items-center">
           <div className="col-lg-7 p-3 p-lg-5 pt-lg-3">
-            <h1 className="display-1 fw-bold">
+            <h1 className="display-1 fw-bold color-black-user">
               Asegura el bienestar de tu Gato! 💜
             </h1>
-            <p className="lead">
+            <p className="lead secondary color-gray-user">
               ¿Adoras a los peludos y bigotones? Entonces, te va a interesar
               esta propuesta. En Gatuna Mata, nos apasiona garantizar que cada
               mascota y criatura reciba el amor y la atención que merece. 🐱

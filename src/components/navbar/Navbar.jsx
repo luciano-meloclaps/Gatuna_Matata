@@ -39,7 +39,7 @@ function NavScrollExample() {
               Iniciar Seccion
             </Button>{" "}
             <Button
-              className="btn bg-secondary-user text-white btn-lg px-5 me-md-2 fw-bold bx-2 border-0"
+              className="btn bg-secondary-user text-white btn-lg  me-md-2 fw-bold bx-2 border-0"
               onClick={() => navigateLogin("/login")}
             >
               Registrarte

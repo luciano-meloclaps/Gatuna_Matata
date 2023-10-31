@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Agbalumo&family=Poppins:wght@400;600&display=swap');
 
+
+
 :root {
     --font-family-marca: 'Agbalumo', sans-serif;
     --font-family-title: 'Poppins', sans-serif;
-    --text: #0e0b0e;
+    --text: #313131;
+    --gray: rgb(102, 102, 102);
     --background: #f3f1f4;
     --primary: #ebbdd7;
     --secondary: #ca96cf;
@@ -13,6 +16,7 @@
 body {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -29,6 +33,10 @@ body {
 /*BG VARIABLES*/
 .bg-black-user {
     background-color: var(--text);
+}
+
+.bg-gray-user {
+    background-color: var(--gray);
 }
 
 .bg-background-user {
@@ -50,6 +58,10 @@ body {
 /*COLOR VARIABLES*/
 .color-black-user {
     color: var(--text);
+}
+
+.color-gray-user {
+    color: var(--gray);
 }
 
 .color-background-user {
