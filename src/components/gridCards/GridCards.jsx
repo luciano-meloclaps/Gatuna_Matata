@@ -4,8 +4,8 @@ import Row from "react-bootstrap/Row";
 
 function GridCardsUser() {
   return (
-    <div class="grid_container py-5 my-5 ">
-      <h2 class="my-5 fs-1 color-accent-user font-tile text-center">
+    <div className="grid_container py-5 my-5 ">
+      <h2 className="my-5 fs-1 color-accent-user font-tile text-center">
         Nuestros Clientes Satisfechos 😍{" "}
       </h2>
       <Row xs={1} md={3} className="g-5  p-5 m-0  row row-cols-md-4">
@@ -19,14 +19,14 @@ function GridCardsUser() {
                 variant="top"
                 src="public\pngimg.com - cat_PNG50538.png"
               />
-              <Card.Body class="p-4">
-                <Card.Title class="color-black-user fs-4 font-title">
+              <Card.Body className="p-4">
+                <Card.Title className="color-black-user fs-4 font-title">
                   Loki
                 </Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">
                   Luciano y Aby
                 </Card.Subtitle>
-                <Card.Text class="color-gray-user">
+                <Card.Text className="color-gray-user">
                   This is a longer card with supporting text below as a natural
                   lead-in to additional content. This content is a little bit
                   longer.

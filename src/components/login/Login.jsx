@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
-const Login = ({ setSignedInHandler }) => {
+const Login = ({ setSignedInHandler, setUserInfoHandler }) => {
   const [email, setEmail] = useState(""); //los state que toman los valores de los input del form
   const [password, setPassword] = useState(""); //los state que toman los valores de los input del form
   const [name, setName] = useState("");
@@ -88,9 +88,8 @@ const Login = ({ setSignedInHandler }) => {
             throw new Error("Error en la solicitud de inicio de sesión");
           }
         })
-        .then(data => {
-          const token = data.token;
-
+        .then(data => {//Esto devuelve toda la información del usuario, name, email, id, etc. Tambien nos da un accessToken
+          setUserInfoHandler(data);
           setSignedInHandler(true); //funcion que pasamos por prop, cambiamos el valor a true así se puede loggear
           navigate("/dashboard"); //redirigimos al dashboard
         })
@@ -105,7 +104,7 @@ const Login = ({ setSignedInHandler }) => {
     <div className="vh-100 d-flex align-items-center background">
       <div className="container col-md-3 bg-light p-5  bg-secondary-user rounded">
         <Form>
-          <h1 class="font-marca text-center color-accent-user p-2">
+          <h1 className="font-marca text-center color-accent-user p-2">
             Gatuna Matata
           </h1>
           <p className="text-center color-secondary-user">
