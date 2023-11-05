@@ -13,6 +13,7 @@ const DateForm = ({user, onShiftDataSaved}) => {
 
     const submitDateHandler = (event) => {
         event.preventDefault();
+        console.log(user)
         const dateData = {
             date: new Date(dateRead),
             name: user.name,
@@ -20,6 +21,7 @@ const DateForm = ({user, onShiftDataSaved}) => {
             state: false
         }
         onShiftDataSaved(dateData);
+        console.log(dateData)
     }
 
     return (

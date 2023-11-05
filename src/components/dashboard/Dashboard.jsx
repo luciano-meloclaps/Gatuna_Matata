@@ -93,6 +93,7 @@ const Dashboard = ({ userInfo }) => {
 
   return (
     <>
+      
       <Navbar />
       <NewDate userInformation={userInfo} addedShiftHandler={addedShiftHandler} />
       <Shift shifts={shifts} />

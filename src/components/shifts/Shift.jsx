@@ -7,8 +7,8 @@ const Shift = ({ shifts }) => {
 
     return (
         <div>
-            <h2>Tu disponibilidad</h2>
-            {shifts.filter(shift => shift.status === false).map(shift => {  //No se actualizan los libros y hay que volver a meterse para que no aparezca más la tarjeta eliminada, arreglar eso :p
+            <h2>Tu disponibilidad</h2>{/Hay que hacer un filter segun el name de los turnos que trae/}
+            {shifts.filter(shift => shift.status === false).map(shift => {  //No se actualizan los libros y hay que volver a meterse para que no aparezca más la tarjeta eliminada, arreglar eso :p 
                 return (
                     <Toast key={shift.id} onClose={() => {
                         fetch(`http://localhost:8000/books/${shift.id}`, { 

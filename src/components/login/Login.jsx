@@ -11,6 +11,7 @@ const Login = ({ setSignedInHandler, setUserInfoHandler }) => {
   const [email, setEmail] = useState(""); //los state que toman los valores de los input del form
   const [password, setPassword] = useState(""); //los state que toman los valores de los input del form
   const [name, setName] = useState("");
+  const [userType, setUserType] = useState("");
   const [loginToggle, setLoginToggle] = useState(false)
 
   const navigate = useNavigate(); //custom hook que después usamos para redirigir al dashboard :p
@@ -27,6 +28,10 @@ const Login = ({ setSignedInHandler, setUserInfoHandler }) => {
 
   const onChangeNameHandler = (event) => {
     setName(event.target.value)
+  }
+
+  const onChangeUserTypeHandler = (event) => {
+    setUserType(event.target.value)
   }
 
   const onClickSetLoginToggleHandler = () => {
@@ -53,7 +58,7 @@ const Login = ({ setSignedInHandler, setUserInfoHandler }) => {
             name: name,
             email: email,
             password: password,
-            userType: "sitter"
+            userType: userType
           }),
         })
           .then((response) => {
@@ -63,6 +68,7 @@ const Login = ({ setSignedInHandler, setUserInfoHandler }) => {
             }
           })
           .then((data) => {
+            setUserInfoHandler(data);
             setSignedInHandler(true); //funcion que pasamos por prop, cambiamos el valor a true así se puede loggear
             navigate("/dashboard"); //redirigimos al dashboard
           })
@@ -138,8 +144,17 @@ const Login = ({ setSignedInHandler, setUserInfoHandler }) => {
               onChange={onChangePasswordHandler}
             />
           </Form.Group>
-
-
+          {/*hay que validar esto che AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */}
+          {loginToggle &&
+            <Form.Group className="mb-3" controlId="formBasicUserType">
+              <Form.Label>Quiero ser...</Form.Label>
+              <Form.Select onChange={onChangeUserTypeHandler}>
+                <option>Elige una opción</option>
+                <option value="client">Cliente</option>
+                <option value="sitter">Niñera</option>
+              </Form.Select>
+            </Form.Group>
+          }
 
           <div className="d-grid gap-2 ">
             <Button onClick={onClickSetLoginToggleHandler} variant="link">{loginToggle ? "¿Ya tienes una cuenta? Inicia sesión" : "¿No tienes cuenta? Registrate"}</Button>
