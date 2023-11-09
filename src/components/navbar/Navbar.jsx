@@ -3,9 +3,13 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router";
+import { useContext } from "react";
+import { AuthenticationContext } from "../services/authentication/authentication.context";
 
 function NavScrollExample() {
   const navigateLogin = useNavigate();
+
+  const {handleLogout} = useContext(AuthenticationContext)
 
   return (
     <Navbar
@@ -35,7 +39,7 @@ function NavScrollExample() {
             <Nav.Link className="mx-2 text-white fs-5" href="#action2">
               Contacto
             </Nav.Link>
-            <Button variant="outline-light mx-4 lg btn-lg fw-bold">
+            <Button variant="outline-light mx-4 lg btn-lg fw-bold" onClick={handleLogout}>
               Iniciar Seccion
             </Button>{" "}
             <Button

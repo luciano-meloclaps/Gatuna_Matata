@@ -84,7 +84,7 @@ const Login = () => {
       }
     }
     else { //si es falso, entra en el login
-      fetch("http://localhost:8000/login", {
+      fetch("http://localhost:8000/login", { //después me fijo si con un async await se arregla :p
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -108,8 +108,6 @@ const Login = () => {
           console.error("Error de inicio de sesión:", error);
         });
     }
-
-
   };
   return (
     <div className="vh-100 d-flex align-items-center background">

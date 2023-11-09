@@ -11,12 +11,12 @@ export const AuthenticationContextProvider = ({ children }) => {
         setUserData(data);
     }
 
-    const handlerLogout = () => {
+    const handleLogout = () => {
         setUserData(null);
     }
 
     return (
-        <AuthenticationContext.Provider value={{ userData, handleLogin, handlerLogout}}>
+        <AuthenticationContext.Provider value={{ userData, handleLogin, handleLogout}}>
             {children}
         </AuthenticationContext.Provider>
     )

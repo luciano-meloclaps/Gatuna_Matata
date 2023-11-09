@@ -10,7 +10,9 @@ const Shift = ({ shifts, setShiftHandler }) => {
 
     const { userData } = useContext(AuthenticationContext)
 
-    const arreglo = shifts.filter(shift => shift.id === userData.id).map(shift => {
+    console.log(userData)
+
+    const arreglo = shifts.filter(shift => shift.email === userData.email).map(shift => {
         return (
             <Toast key={shift.id} onClose={async () => {
                 await fetch(`http://localhost:8000/books/${shift.id}`, {
