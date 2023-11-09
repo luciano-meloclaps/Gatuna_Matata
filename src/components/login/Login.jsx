@@ -1,28 +1,31 @@
 import React from "react";
-
-import "./login.css";
-
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { useContext } from "react";
+import { AuthenticationContext } from "../services/authentication/authentication.context";
 
-const Login = ({ setSignedInHandler, setUserInfoHandler }) => {
+import "./login.css";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+
+
+
+const Login = () => {
   const [email, setEmail] = useState(""); //los state que toman los valores de los input del form
   const [password, setPassword] = useState(""); //los state que toman los valores de los input del form
   const [name, setName] = useState("");
   const [userType, setUserType] = useState("");
-  const [loginToggle, setLoginToggle] = useState(false)
+  const [loginRegisterToggle, setLoginRegisterToggle] = useState(false)
 
-  const navigate = useNavigate(); //custom hook que después usamos para redirigir al dashboard :p
+  const { handleLogin } = useContext(AuthenticationContext)
+
+  ////LOGIN FORM///////
 
   const onChangeEmailHandler = (event) => {
-    //las funciones que cambian los valores a medida que se ingresan datos en el form
     setEmail(event.target.value);
   };
 
   const onChangePasswordHandler = (event) => {
-    //las funciones que cambian los valores a medida que se ingresan datos en el form
     setPassword(event.target.value);
   };
 
@@ -34,14 +37,18 @@ const Login = ({ setSignedInHandler, setUserInfoHandler }) => {
     setUserType(event.target.value)
   }
 
+  /////////////////////
+
+  const navigate = useNavigate();
+
   const onClickSetLoginToggleHandler = () => {
-    setLoginToggle(!loginToggle)
+    setLoginRegisterToggle(!loginRegisterToggle)
   }
 
   const onClickLogInHandler = (event) => { //le hace falta una forma de mostrarle al usuario que ingreso la información incorrecta, tambien hay que hacer un logout, y tambien hay que hacer un renderizado condicional de si el register es para cliente o para niñera, si es para cliente hay que pedir su direccion, así despues se lo encajamos al turno de la niñera :p
     event.preventDefault();
 
-    if (loginToggle) { //si es verdadero, entra en el register
+    if (loginRegisterToggle) { //si es verdadero, entra en el register
       if (email.length === 0 || password.length === 0) {
         //CAMBIAR VALIDACIONES/
         alert("Usuario inválido para registrarse");
@@ -68,9 +75,8 @@ const Login = ({ setSignedInHandler, setUserInfoHandler }) => {
             }
           })
           .then((data) => {
-            setUserInfoHandler(data);
-            setSignedInHandler(true); //funcion que pasamos por prop, cambiamos el valor a true así se puede loggear
-            navigate("/dashboard"); //redirigimos al dashboard
+            handleLogin(data);
+            navigate("/dashboard"); 
           })
           .catch((error) => {
             console.log(error);
@@ -95,9 +101,8 @@ const Login = ({ setSignedInHandler, setUserInfoHandler }) => {
           }
         })
         .then(data => {//Esto devuelve toda la información del usuario, name, email, id, etc. Tambien nos da un accessToken
-          setUserInfoHandler(data);
-          setSignedInHandler(true); //funcion que pasamos por prop, cambiamos el valor a true así se puede loggear
-          navigate("/dashboard"); //redirigimos al dashboard
+          handleLogin(data);
+          navigate("/dashboard"); 
         })
         .catch(error => {
           console.error("Error de inicio de sesión:", error);
@@ -117,7 +122,7 @@ const Login = ({ setSignedInHandler, setUserInfoHandler }) => {
             "miau miau miau miau miau miau"
           </p>
           <hr />
-          {loginToggle && <Form.Group className="my-3" controlId="formBasicName">
+          {loginRegisterToggle && <Form.Group className="my-3" controlId="formBasicName">
             <Form.Label>Nombre</Form.Label>
             <Form.Control
               type="text"
@@ -145,7 +150,7 @@ const Login = ({ setSignedInHandler, setUserInfoHandler }) => {
             />
           </Form.Group>
           {/*hay que validar esto che AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */}
-          {loginToggle &&
+          {loginRegisterToggle &&
             <Form.Group className="mb-3" controlId="formBasicUserType">
               <Form.Label>Quiero ser...</Form.Label>
               <Form.Select onChange={onChangeUserTypeHandler}>
@@ -157,13 +162,13 @@ const Login = ({ setSignedInHandler, setUserInfoHandler }) => {
           }
 
           <div className="d-grid gap-2 ">
-            <Button onClick={onClickSetLoginToggleHandler} variant="link">{loginToggle ? "¿Ya tienes una cuenta? Inicia sesión" : "¿No tienes cuenta? Registrate"}</Button>
-            <p>{loginToggle.toString()}</p>
+            <Button onClick={onClickSetLoginToggleHandler} variant="link">{loginRegisterToggle ? "¿Ya tienes una cuenta? Inicia sesión" : "¿No tienes cuenta? Registrate"}</Button>
+            <p>{loginRegisterToggle.toString()}</p>
             <Button
               size=" btn bg-secondary-user text-white btn-lg px-5 me-md-2 fw-bold bx-2 border-0"
               onClick={onClickLogInHandler}
             >
-              {loginToggle ? "Registrarse" : "Iniciar sesión"}
+              {loginRegisterToggle ? "Registrarse" : "Iniciar sesión"}
             </Button>
           </div>
         </Form>

@@ -1,8 +1,13 @@
 import React, { useState } from 'react'
+import { useContext } from 'react';
+import { AuthenticationContext } from '../services/authentication/authentication.context';
+
 import Button from 'react-bootstrap/esm/Button';
 
-const DateForm = ({user, onShiftDataSaved}) => {
+const DateForm = ({ onShiftDataSaved}) => {
     const [dateRead, setDateRead] = useState("");
+
+    const { userData } = useContext(AuthenticationContext)
 
     const currentDate = new Date();
     const currentDateString = currentDate.toISOString().slice(0, 10);
@@ -13,15 +18,13 @@ const DateForm = ({user, onShiftDataSaved}) => {
 
     const submitDateHandler = (event) => {
         event.preventDefault();
-        console.log(user)
         const dateData = {
             date: new Date(dateRead),
-            name: user.name,
-            email: user.email,
+            name: userData.name,
+            email: userData.email,
             state: false
         }
         onShiftDataSaved(dateData);
-        console.log(dateData)
     }
 
     return (

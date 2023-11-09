@@ -1,7 +1,7 @@
 import React from 'react'
 import DateForm from '../dateForm/DateForm'
 
-const NewDate = ({userInformation, addedShiftHandler}) => {
+const NewDate = ({ addedShiftHandler}) => {
 
     const saveShiftDataHandler = (enteredShiftData) => {
         const shiftData = {
@@ -13,7 +13,7 @@ const NewDate = ({userInformation, addedShiftHandler}) => {
 
     return (
         <div>
-            <DateForm user={userInformation} onShiftDataSaved={saveShiftDataHandler}/>
+            <DateForm onShiftDataSaved={saveShiftDataHandler}/>
         </div>
     )
 }
