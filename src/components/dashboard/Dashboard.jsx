@@ -18,7 +18,7 @@ function shiftsDateMapped(shifts) {
 const Dashboard = () => {
   const [shifts, setShifts] = useState([]);
 
-  const { data, loading} = useFetch("http://localhost:8000/books")
+  const { data, loading } = useFetch("http://localhost:8000/books")
 
   const setShiftHandler = (value) => {
     setShifts(value)
@@ -70,6 +70,8 @@ const Dashboard = () => {
       <Navbar /> {/*Stateless*/}
       <NewDate addedShiftHandler={addedShiftHandler} /> {/*agrega un nuevo turno */}
       <Shift shifts={shifts} setShiftHandler={setShiftHandler}/> {/*Muestra los turnos*/}
+
+      
       <Footer /> {/*Stateless*/}
     </>
   );

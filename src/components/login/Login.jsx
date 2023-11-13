@@ -76,7 +76,7 @@ const Login = () => {
           })
           .then((data) => {
             handleLogin(data);
-            navigate("/dashboard"); 
+            navigate("/dashboard");
           })
           .catch((error) => {
             console.log(error);
@@ -84,29 +84,33 @@ const Login = () => {
       }
     }
     else { //si es falso, entra en el login
-      fetch("http://localhost:8000/login", { //después me fijo si con un async await se arregla :p
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password
-        })
-      })
-        .then((response) => {
-          if (response.ok) return response.json();
-          else {
+      async function loginUser() {
+        try {
+          const response = await fetch("http://localhost:8000/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: email,
+              password: password,
+            }),
+          });
+
+          if (!response.ok) {
             throw new Error("Error en la solicitud de inicio de sesión");
           }
-        })
-        .then(data => {//Esto devuelve toda la información del usuario, name, email, id, etc. Tambien nos da un accessToken
+
+          const data = await response.json();
           handleLogin(data);
-          navigate("/dashboard"); 
-        })
-        .catch(error => {
+          navigate("/dashboard");
+        } catch (error) {
           console.error("Error de inicio de sesión:", error);
-        });
+        }
+      }
+
+      // Llamar a la función para iniciar sesión
+      loginUser();
     }
   };
   return (
