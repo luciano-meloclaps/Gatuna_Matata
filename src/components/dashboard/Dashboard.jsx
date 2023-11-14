@@ -26,7 +26,7 @@ const Dashboard = () => {
 
   const addedShiftHandler = (ShiftData) => {
     const dateString = ShiftData.date.toISOString().slice(0, 10);
-    const newShiftId = Math.random();//arreglar esto
+    const newShiftId = Math.random();//Hacer contador tipo +1 agarrando el ultimo id
 
     fetch("http://localhost:8000/shifts", { //el post más largo que hice en mi vida
       method: "POST", 
