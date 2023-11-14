@@ -15,7 +15,7 @@ const Shift = ({ shifts, setShiftHandler }) => {
     const shiftsArray = userData.userType === "sitter" ? shifts.filter(shift => shift.email === userData.email).map(shift => {
         return (
             <Toast key={shift.id} onClose={async () => {
-                await fetch(`http://localhost:8000/books/${shift.id}`, {
+                await fetch(`http://localhost:8000/shifts/${shift.id}`, {
                     method: "DELETE",
                     headers: {
                         "content-type": "application/json",
@@ -33,7 +33,7 @@ const Shift = ({ shifts, setShiftHandler }) => {
 
                 ////////////////////////////////////////
 
-                await fetch("http://localhost:8000/books", {
+                await fetch("http://localhost:8000/shifts", {
                     headers: {
                         accept: "application/json",
                     },
@@ -56,7 +56,7 @@ const Shift = ({ shifts, setShiftHandler }) => {
                 </Toast.Body>
             </Toast>
         )
-    }) : shifts.map(shift => {
+    }) : shifts?.map(shift => {
         return (
             <Toast key={shift.id}>
                 <Toast.Header>
@@ -73,7 +73,7 @@ const Shift = ({ shifts, setShiftHandler }) => {
                     }
 
                     try {
-                        const response = await fetch(`http://localhost:8000/books/${shift.id}`, {
+                        const response = await fetch(`http://localhost:8000/shifts/${shift.id}`, {
                             method: "PUT",
                             headers: {
                                 'Content-Type': 'application/json',

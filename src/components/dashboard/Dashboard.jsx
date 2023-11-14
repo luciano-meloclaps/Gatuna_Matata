@@ -9,7 +9,7 @@ import Shift from "../shifts/Shift";
 import useFetch from "../custom/useFetch/useFetch";
 
 function shiftsDateMapped(shifts) {
-  return shifts.map((shift) => ({
+  return shifts?.map((shift) => ({
     ...shift,
     date: new Date(shift.date),
   }));
@@ -18,7 +18,7 @@ function shiftsDateMapped(shifts) {
 const Dashboard = () => {
   const [shifts, setShifts] = useState([]);
 
-  const { data, loading } = useFetch("http://localhost:8000/books")
+  const { data, loading } = useFetch("http://localhost:8000/shifts")
 
   const setShiftHandler = (value) => {
     setShifts(value)
@@ -28,7 +28,7 @@ const Dashboard = () => {
     const dateString = ShiftData.date.toISOString().slice(0, 10);
     const newShiftId = Math.random();//arreglar esto
 
-    fetch("http://localhost:8000/books", { //el post más largo que hice en mi vida
+    fetch("http://localhost:8000/shifts", { //el post más largo que hice en mi vida
       method: "POST", 
       headers: {
         "content-type": "application/json", 

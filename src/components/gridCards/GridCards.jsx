@@ -17,7 +17,7 @@ function GridCardsUser() {
             >
               <Card.Img
                 variant="top"
-                src="public\pngimg.com - cat_PNG50538.png"
+                src="public\lokiverse.jpg"
               />
               <Card.Body className="p-4">
                 <Card.Title className="color-black-user fs-4 font-title">
@@ -27,9 +27,8 @@ function GridCardsUser() {
                   Luciano y Aby
                 </Card.Subtitle>
                 <Card.Text className="color-gray-user">
-                  This is a longer card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
+                  Excelente servicio por parte de Gatuna Matata. Loki es muy feliz cada vez que viene su niñera.
+                  Super recomendable este servicio! 
                 </Card.Text>
               </Card.Body>
             </Card>

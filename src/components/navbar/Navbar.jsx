@@ -9,7 +9,7 @@ import { AuthenticationContext } from "../services/authentication/authentication
 function NavScrollExample() {
   const navigateLogin = useNavigate();
 
-  const {handleLogout} = useContext(AuthenticationContext)
+  const {handleLogout, userData} = useContext(AuthenticationContext)
 
   return (
     <Navbar
@@ -39,9 +39,9 @@ function NavScrollExample() {
             <Nav.Link className="mx-2 text-white fs-5" href="#action2">
               Contacto
             </Nav.Link>
-            <Button variant="outline-light mx-4 lg btn-lg fw-bold" onClick={handleLogout}>
-              Iniciar Seccion
-            </Button>{" "}
+            {userData && <Button variant="outline-light mx-4 lg btn-lg fw-bold" onClick={handleLogout}>
+              Cerrar sesión
+            </Button>}
             <Button
               className="btn bg-secondary-user text-white btn-lg  me-md-2 fw-bold bx-2 border-0"
               onClick={() => navigateLogin("/login")}

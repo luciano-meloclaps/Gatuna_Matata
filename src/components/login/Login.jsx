@@ -15,7 +15,7 @@ const Login = () => {
   const [password, setPassword] = useState(""); //los state que toman los valores de los input del form
   const [name, setName] = useState("");
   const [userType, setUserType] = useState("");
-  const [loginRegisterToggle, setLoginRegisterToggle] = useState(false)
+  const [loginRegisterToggle, setLoginRegisterToggle] = useState(true)
 
   const { handleLogin } = useContext(AuthenticationContext)
 
@@ -85,6 +85,7 @@ const Login = () => {
     }
     else { //si es falso, entra en el login
       async function loginUser() {
+        debugger;
         try {
           const response = await fetch("http://localhost:8000/login", {
             method: "POST",
@@ -165,7 +166,6 @@ const Login = () => {
 
           <div className="d-grid gap-2 ">
             <Button onClick={onClickSetLoginToggleHandler} variant="link">{loginRegisterToggle ? "¿Ya tienes una cuenta? Inicia sesión" : "¿No tienes cuenta? Registrate"}</Button>
-            <p>{loginRegisterToggle.toString()}</p>
             <Button
               size=" btn bg-secondary-user text-white btn-lg px-5 me-md-2 fw-bold bx-2 border-0"
               onClick={onClickLogInHandler}
