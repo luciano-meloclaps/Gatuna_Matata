@@ -26,56 +26,64 @@ const Dashboard = () => {
   };
 
   const addedShiftHandler = (ShiftData) => {
-    const dateString = ShiftData.date.toISOString().slice(0, 10);
-    const newShiftId = Math.random(); //arreglar esto
+    const dates = shifts.map(shift => shift.date.toISOString().slice(0, 10))
 
-    fetch("http://localhost:8000/shifts", {
-      //el post más largo que hice en mi vida
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        //en la body de la request se van a encontrar los datos que vamos a enviar
-        id: newShiftId,
-        date: dateString,
-        name: ShiftData.name,
-        email: ShiftData.email,
-        status: false,
-      }),
-    })
-      .then((response) => {
-        if (response.ok) return response.json();
-        else {
-          throw new Error("The response has some errors!");
-        }
+    const dateString = ShiftData.date.toISOString().slice(0, 10);
+
+    const newShiftId = Math.random();//Hacer contador tipo +1 agarrando el ultimo id
+
+    if (dates.includes(ShiftData.date.toISOString().slice(0, 10))) {
+      alert("ejem, ejem")
+    } else {
+      fetch("http://localhost:8000/shifts", { //el post más largo que hice en mi vida
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ //en la body de la request se van a encontrar los datos que vamos a enviar
+          id: newShiftId,
+          date: dateString,
+          name: ShiftData.name,
+          email: ShiftData.email,
+          status: false,
+        }),
       })
-      .then(() => {
-        //actualizamos el estado, de manera que el cliente no necesito refrescar la página para ver el nuevo turno agregado
-        const newShiftsArray = [{ ...ShiftData, id: newShiftId }, ...shifts]; //arreglar esto
-        setShifts(newShiftsArray);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+        .then((response) => {
+          if (response.ok) return response.json();
+          else {
+            throw new Error("The response has some errors!");
+          }
+        })
+        .then(() => { //actualizamos el estado, de manera que el cliente no necesito refrescar la página para ver el nuevo turno agregado
+          const newShiftsArray = [{ ...ShiftData, id: newShiftId }, ...shifts]; //arreglar esto
+          setShifts(newShiftsArray);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    }
+  }
+
 
   ////////////////////////////////////////////////////////////////
 
   useEffect(() => {
     if (!loading && data) {
-      const shiftMapped = shiftsDateMapped(data);
-      setShifts(shiftMapped);
+
+      const shiftMapped = shiftsDateMapped(data)
+      setShifts(shiftMapped)
     }
   }, [data, loading]);
+
+
 
   return (
     <>
       <Navbar /> {/*Stateless*/}
-      <NewDate addedShiftHandler={addedShiftHandler} />{" "}
-      {/*agrega un nuevo turno */}
-      <Shifts2 shifts={shifts} setShiftHandler={setShiftHandler} />{" "}
-      {/*Muestra los turnos*/}
+
+      <NewDate addedShiftHandler={addedShiftHandler} /> {/*agrega un nuevo turno */}
+      <Shift shifts={shifts} setShiftHandler={setShiftHandler} /> {/*Muestra los turnos*/}
+
       <Footer /> {/*Stateless*/}
     </>
   );

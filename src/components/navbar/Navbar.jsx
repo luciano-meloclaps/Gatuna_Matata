@@ -27,9 +27,6 @@ function NavScrollExample() {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link className="mx-2 text-white fs-5" href="#action1">
-              Home
-            </Nav.Link>
             <Nav.Link className="mx-2 text-white fs-5" href="#action2">
               Mascotas
             </Nav.Link>
@@ -42,6 +39,12 @@ function NavScrollExample() {
             {userData && <Button variant="outline-light mx-4 lg btn-lg fw-bold" onClick={handleLogout}>
               Cerrar sesión
             </Button>}
+            <Button
+              className="btn bg-secondary-user text-white btn-lg  me-md-2 fw-bold bx-2 border-0"
+              onClick={() => navigateLogin("/login")}
+            >
+              Iniciar sesión
+            </Button>{" "}
             <Button
               className="btn bg-secondary-user text-white btn-lg  me-md-2 fw-bold bx-2 border-0"
               onClick={() => navigateLogin("/login")}
