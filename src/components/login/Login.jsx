@@ -7,6 +7,7 @@ import { AuthenticationContext } from "../services/authentication/authentication
 import "./login.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import useFetch from "../custom/useFetch/useFetch";
 
 
 
@@ -18,6 +19,9 @@ const Login = () => {
   const [loginRegisterToggle, setLoginRegisterToggle] = useState(true)
 
   const { handleLogin } = useContext(AuthenticationContext)
+
+  const { data } = useFetch("http://localhost:8000/users")
+  
 
   ////LOGIN FORM///////
 
@@ -55,7 +59,7 @@ const Login = () => {
         return;
       }
       else {
-        fetch("http://localhost:8000/register", {
+        fetch("http://localhost:8000/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -84,34 +88,16 @@ const Login = () => {
       }
     }
     else { //si es falso, entra en el login
-      async function loginUser() {
-        debugger;
-        try {
-          const response = await fetch("http://localhost:8000/login", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              email: email,
-              password: password,
-            }),
-          });
 
-          if (!response.ok) {
-            throw new Error("Error en la solicitud de inicio de sesión");
-          }
+      const enteredUser = data.find(user => user.email === email)
 
-          const data = await response.json();
-          handleLogin(data);
-          navigate("/dashboard");
-        } catch (error) {
-          console.error("Error de inicio de sesión:", error);
-        }
+      if(enteredUser === undefined || enteredUser.password !== password){
+        alert("contraseña o email incorrectos") //hacer una validación linda viste
+      } else {
+        handleLogin(enteredUser);
+        navigate("/dashboard");
       }
 
-      // Llamar a la función para iniciar sesión
-      loginUser();
     }
   };
   return (
