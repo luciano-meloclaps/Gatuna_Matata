@@ -5,8 +5,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "../navbar/Navbar";
 import Footer from "../footer/Footer";
 import NewDate from "../newDate/NewDate";
-import Shift from "../shifts/Shift";
+
 import useFetch from "../custom/useFetch/useFetch";
+import Shift from "../shifts/Shift";
 
 function shiftsDateMapped(shifts) {
   return shifts?.map((shift) => ({
@@ -69,9 +70,8 @@ const Dashboard = () => {
     <>
       <Navbar /> {/*Stateless*/}
       <NewDate addedShiftHandler={addedShiftHandler} /> {/*agrega un nuevo turno */}
-      <Shift shifts={shifts} setShiftHandler={setShiftHandler}/> {/*Muestra los turnos*/}
+      <Shift shifts={shifts} setShiftHandler={setShiftHandler}/> {/* Muestra los turnos */}
 
-      
       <Footer /> {/*Stateless*/}
     </>
   );
