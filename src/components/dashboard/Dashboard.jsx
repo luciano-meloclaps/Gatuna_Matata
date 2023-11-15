@@ -5,8 +5,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "../navbar/Navbar";
 import Footer from "../footer/Footer";
 import NewDate from "../newDate/NewDate";
-import Shift from "../shifts/Shift";
+
 import useFetch from "../custom/useFetch/useFetch";
+import Shifts2 from "../shifts2/Shifts2";
 
 function shiftsDateMapped(shifts) {
   return shifts?.map((shift) => ({
@@ -18,16 +19,17 @@ function shiftsDateMapped(shifts) {
 const Dashboard = () => {
   const [shifts, setShifts] = useState([]);
 
-  const { data, loading } = useFetch("http://localhost:8000/shifts")
+  const { data, loading } = useFetch("http://localhost:8000/shifts");
 
   const setShiftHandler = (value) => {
-    setShifts(value)
-  }
+    setShifts(value);
+  };
 
   const addedShiftHandler = (ShiftData) => {
     const dates = shifts.map(shift => shift.date.toISOString().slice(0, 10))
 
     const dateString = ShiftData.date.toISOString().slice(0, 10);
+
     const newShiftId = Math.random();//Hacer contador tipo +1 agarrando el ultimo id
 
     if (dates.includes(ShiftData.date.toISOString().slice(0, 10))) {
@@ -62,21 +64,26 @@ const Dashboard = () => {
     }
   }
 
+
   ////////////////////////////////////////////////////////////////
 
   useEffect(() => {
     if (!loading && data) {
+
       const shiftMapped = shiftsDateMapped(data)
       setShifts(shiftMapped)
     }
   }, [data, loading]);
 
 
+
   return (
     <>
       <Navbar /> {/*Stateless*/}
+
       <NewDate addedShiftHandler={addedShiftHandler} /> {/*agrega un nuevo turno */}
       <Shift shifts={shifts} setShiftHandler={setShiftHandler} /> {/*Muestra los turnos*/}
+
       <Footer /> {/*Stateless*/}
     </>
   );
