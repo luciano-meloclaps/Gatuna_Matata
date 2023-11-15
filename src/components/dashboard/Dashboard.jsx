@@ -7,7 +7,9 @@ import Footer from "../footer/Footer";
 import NewDate from "../newDate/NewDate";
 
 import useFetch from "../custom/useFetch/useFetch";
-import Shifts2 from "../shifts2/Shifts2";
+
+import Shift from "../shifts/Shift";
+
 
 function shiftsDateMapped(shifts) {
   return shifts?.map((shift) => ({
@@ -82,7 +84,8 @@ const Dashboard = () => {
       <Navbar /> {/*Stateless*/}
 
       <NewDate addedShiftHandler={addedShiftHandler} /> {/*agrega un nuevo turno */}
-      <Shift shifts={shifts} setShiftHandler={setShiftHandler} /> {/*Muestra los turnos*/}
+
+      <Shift shifts={shifts} setShiftHandler={setShiftHandler}/> {/* Muestra los turnos */}
 
       <Footer /> {/*Stateless*/}
     </>
