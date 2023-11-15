@@ -2,8 +2,13 @@ import Col from "react-bootstrap/Col";
 import Nav from "react-bootstrap/Nav";
 import Row from "react-bootstrap/Row";
 import Tab from "react-bootstrap/Tab";
+import Button from "react-bootstrap/esm/Button";
+import DateFixed from "../dateFixed/DateFixed";
 
-const Shifts2 = () => {
+const Shifts2 = ({ shifts }) => {
+
+  console.log(shifts)
+
   return (
     <>
       <div className="m-5">
@@ -12,10 +17,10 @@ const Shifts2 = () => {
             <Col sm={2}>
               <Nav variant="pills" className="flex-column">
                 <Nav.Item>
-                  <Nav.Link eventKey="first">Turnos disponibles</Nav.Link>
+                  <Nav.Link eventKey="first">Tu disponibilidad</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link eventKey="second">Turnos tomasdos</Nav.Link>
+                  <Nav.Link eventKey="second">Turnos reservados</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                   <Nav.Link eventKey="tertiary" disabled>
@@ -35,47 +40,30 @@ const Shifts2 = () => {
                           #
                         </th>
                         <th className="text-info" scope="col">
-                          Nombre de niñera
+                          Turnos
                         </th>
-                        <th className="text-info" scope="col">
-                          Cliente
+                        <th className="text-danger" scope="col">
+                          dia
                         </th>
-                        <th className="text-info" scope="col">
-                          Direccion
+                        <th className="text-danger" scope="col">
+                          mes
                         </th>
-                        <th className="text-info" scope="col">
-                          Nombre del rufian
-                        </th>
-                        <th className="text-info" scope="col">
-                          Fecha
+                        <th className="text-danger" scope="col">
+                          año
                         </th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>Larry the Bird</td>
-                        <td>@twitter</td>
-                        <td>@twitter</td>
-                        <td>@twitter</td>
-                        <td>@twitter</td>
-                      </tr>
+                      {shifts.map((mierda, index) => {
+                        return (
+                          <tr>
+                            <th scope="row">{index}</th>
+                            <td></td>
+                            <DateFixed date={mierda.date}/>
+                            <Button>Cancelar</Button>
+                          </tr>
+                        )
+                      })}
                     </tbody>
                   </table>
                 </Tab.Pane>

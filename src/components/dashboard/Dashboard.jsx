@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -8,6 +8,8 @@ import NewDate from "../newDate/NewDate";
 
 import useFetch from "../custom/useFetch/useFetch";
 import Shifts2 from "../shifts2/Shifts2";
+import Shift from "../shifts/Shift";
+import { AuthenticationContext } from "../services/authentication/authentication.context";
 
 function shiftsDateMapped(shifts) {
   return shifts?.map((shift) => ({
@@ -19,6 +21,8 @@ function shiftsDateMapped(shifts) {
 const Dashboard = () => {
   const [shifts, setShifts] = useState([]);
 
+  const { userData } = useContext(AuthenticationContext);
+
   const { data, loading } = useFetch("http://localhost:8000/shifts");
 
   const setShiftHandler = (value) => {
@@ -26,7 +30,7 @@ const Dashboard = () => {
   };
 
   const addedShiftHandler = (ShiftData) => {
-    const dates = shifts.map(shift => shift.date.toISOString().slice(0, 10))
+    const dates = shifts.filter(shift => shift.email === userData.email).map(shift => shift.date.toISOString().slice(0, 10))
 
     const dateString = ShiftData.date.toISOString().slice(0, 10);
 
@@ -82,7 +86,7 @@ const Dashboard = () => {
       <Navbar /> {/*Stateless*/}
 
       <NewDate addedShiftHandler={addedShiftHandler} /> {/*agrega un nuevo turno */}
-      <Shift shifts={shifts} setShiftHandler={setShiftHandler} /> {/*Muestra los turnos*/}
+      <Shifts2 shifts={shifts} setShiftHandler={setShiftHandler} /> {/*Muestra los turnos*/}
 
       <Footer /> {/*Stateless*/}
     </>
