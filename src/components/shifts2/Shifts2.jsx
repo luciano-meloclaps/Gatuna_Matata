@@ -54,12 +54,12 @@ const Shifts2 = ({ shifts }) => {
                       </tr>
                     </thead>
                     <tbody>
-                      {shifts.map((mierda, index) => {
+                      {shifts.map((shift, index) => {
                         return (
                           <tr>
                             <th scope="row">{index}</th>
                             <td></td>
-                            <DateFixed date={mierda.date}/>
+                            <DateFixed date={shift.date}/>
                             <Button>Cancelar</Button>
                           </tr>
                         )
