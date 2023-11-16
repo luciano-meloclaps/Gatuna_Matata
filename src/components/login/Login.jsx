@@ -124,7 +124,7 @@ const Login = () => {
             <Form.Label>Email</Form.Label>
             <Form.Control
               type="email"
-              placeholder="michi@miau.com"
+              placeholder="Ingrese su email"
               onChange={onChangeEmailHandler}
             />
             <Form.Text className="text-muted">{email}</Form.Text>

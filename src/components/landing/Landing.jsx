@@ -41,7 +41,7 @@ const Landing = () => {
     <>
       <Navbar />
       <Hero />
-      <GridCardsUser />
+      <GridCardsUser/>
       <FormComponent />
       <Footer />
     </>
