@@ -11,7 +11,7 @@ const DateFixed = ({ date }) => {
 
     const { userData } = useContext(AuthenticationContext)
 
-    if (userData.userType === "sitter" || userData.userType === "client") {
+    if (userData.userType === "sitter" || userData.userType === "client" || userData.userType === "SYS_Admin") {
         return (
             <>
                 <td>
