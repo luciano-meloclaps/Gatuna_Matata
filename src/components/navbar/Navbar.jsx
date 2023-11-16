@@ -39,18 +39,20 @@ function NavScrollExample() {
             {userData && <Button variant="outline-light mx-4 lg btn-lg fw-bold" onClick={handleLogout}>
               Cerrar sesión
             </Button>}
+            {!userData &&
             <Button
               className="btn bg-secondary-user text-white btn-lg  me-md-2 fw-bold bx-2 border-0"
               onClick={() => navigateLogin("/login")}
             >
               Iniciar sesión
-            </Button>{" "}
+            </Button>};{" "}
+            {!userData &&
             <Button
               className="btn bg-secondary-user text-white btn-lg  me-md-2 fw-bold bx-2 border-0"
               onClick={() => navigateLogin("/login")}
             >
               Registrarte
-            </Button>{" "}
+            </Button>};{" "}
           </Nav>
         </Navbar.Collapse>
       </Container>
