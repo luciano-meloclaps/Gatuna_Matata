@@ -18,7 +18,10 @@ const Form = () => {
   };
 
   return (
-    <div className="d-flex justify-content-center  flex-column my-5" id='form'>
+    <div
+      className="d-flex text-white justify-content-center  flex-column my-5"
+      id="form"
+    >
       <h1 className="d-flex fs-1 color-accent-user justify-content-center">
         Tienes algo para comentarnos? 🫡
       </h1>
@@ -41,7 +44,7 @@ const Form = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <div id="emailHelp" className="form-text">
+            <div id="emailHelp" className="form-text text-secondary">
               No compartiremos tus datos con nadie 😊
             </div>
           </div>
@@ -87,7 +90,7 @@ const Form = () => {
           {/*BUTTON*/}
           <Button
             type="submit"
-            className="btn bg-accent-user text-white btn-lg px-5 me-md-2 fw-bold bx-2 border-0"
+            className="btn bg-info text-white btn-lg px-5 me-md-2 fw-bold bx-2 border-0"
           >
             Submit
           </Button>

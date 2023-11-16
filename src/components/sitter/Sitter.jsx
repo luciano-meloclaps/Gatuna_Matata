@@ -2,8 +2,8 @@ import React from "react";
 
 const Sitter = () => {
   return (
-    <div>
-      <div class="container px-4 py-5 rounded">
+    <div id="sitter" className="vh-100">
+      <div class="container my-5 px-4 py-5 rounded">
         <h2 class="pb-2 border-bottom color-accent-user  ">
           Las mejores niñeras de gatos 😺
         </h2>
