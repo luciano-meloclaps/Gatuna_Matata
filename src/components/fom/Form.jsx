@@ -18,7 +18,7 @@ const Form = () => {
   };
 
   return (
-    <div className="d-flex justify-content-center  flex-column my-5">
+    <div className="d-flex justify-content-center  flex-column my-5" id='form'>
       <h1 className="d-flex fs-1 color-accent-user justify-content-center">
         Tienes algo para comentarnos? 🫡
       </h1>
