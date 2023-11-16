@@ -19,7 +19,7 @@ const Hero = () => {
             </p>
             <div className="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3 ">
               <Button
-                className="btn bg-secondary-user text-white btn-lg px-5 me-md-2 fw-bold bx-2 border-0"
+                className="btn bg-info text-white btn-lg px-5 me-md-2 fw-bold bx-2 border-0"
                 onClick={() => navigateLoginHero("/login")}
               >
                 Registrate!

@@ -16,26 +16,38 @@ function NavScrollExample() {
   return (
     <Navbar
       expand="lg"
-      className="navbar_container p-3 bg-primary-user sticky-top"
+      className="navbar_container p-3 bg-primary-user text-decoration-none sticky-top"
     >
       <Container fluid>
-        <Navbar.Brand className="mx-5 fs-2 text-white font-marca" href="#">
+        <Navbar.Brand className="mx-5 fs-2 text-white  font-marca" href="#">
           Gatuna Matata
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
-            className="ms-auto my-2 text-whit my-lg-0"
+            className="ms-auto d-flex align-items-center text-whit my-lg-0"
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <HashLink smooth to="/#gridcards" className="mx-2 text-white fs-5">
+            <HashLink
+              smooth
+              to="/#gridcards"
+              className="mx-2 text-decoration-none text-white fs-5"
+            >
               Mascotas
             </HashLink>
-            <Nav.Link className="mx-2 text-white fs-5" href="#action2">
+            <HashLink
+              smooth
+              to="/#sitter"
+              className="mx-2 text-decoration-none text-white fs-5"
+            >
               Niñeras
-            </Nav.Link>
-            <HashLink smooth to="/#form" className="mx-2 text-white fs-5">
+            </HashLink>
+            <HashLink
+              smooth
+              to="/#form"
+              className="mx-2 text-decoration-none text-white fs-5"
+            >
               Contacto
             </HashLink>
             {userData && (
@@ -48,7 +60,7 @@ function NavScrollExample() {
             )}
             {!userData && (
               <Button
-                className="btn bg-secondary-user text-white btn-lg  me-md-2 fw-bold bx-2 border-0"
+                className="btn-lg bg-info text-white me-md-2 fw-bold bx-2 border-0"
                 onClick={() => navigateLogin("/login")}
               >
                 Iniciar sesión
@@ -57,7 +69,7 @@ function NavScrollExample() {
             ;{""}
             {!userData && (
               <Button
-                className="btn bg-secondary-user text-white btn-lg  me-md-2 fw-bold bx-2 border-0"
+                variant="outline-light lg btn-lg fw-bold"
                 onClick={() => navigateLogin("/login")}
               >
                 Registrarte

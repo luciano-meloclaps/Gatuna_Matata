@@ -59,17 +59,17 @@ const Footer = () => {
             <h5 className="text-white">Legales</h5>
             <ul className="nav flex-column">
               <li className="nav-item mb-1">
-                <a href="#" className="nav-link p-0 text-muted">
+                <a href="#" className="nav-link p-0  text-secondary">
                   Licencia
                 </a>
               </li>
               <li className="nav-item mb-1">
-                <a href="#" className="nav-link p-0 text-muted">
+                <a href="#" className="nav-link p-0  text-secondary">
                   Política de devoluciones
                 </a>
               </li>
               <li className="nav-item mb-1">
-                <a href="#" className="nav-link p-0 text-muted">
+                <a href="#" className="nav-link p-0  text-secondary">
                   Política de envío
                 </a>
               </li>
@@ -80,17 +80,17 @@ const Footer = () => {
             <h5 className="text-white">Terminos y condiciones</h5>
             <ul className="nav flex-column">
               <li className="nav-item mb-1">
-                <a href="#" className="nav-link p-0 text-muted">
+                <a href="#" className="nav-link p-0  text-secondary">
                   Términos de servicio
                 </a>
               </li>
               <li className="nav-item mb-1">
-                <a href="#" className="nav-link p-0 text-muted">
+                <a href="#" className="nav-link p-0  text-secondary">
                   Política de privacidad
                 </a>
               </li>
               <li className="nav-item mb-1">
-                <a href="#" className="nav-link p-0 text-muted">
+                <a href="#" className="nav-link p-0  text-secondary">
                   Política de cookies
                 </a>
               </li>
@@ -101,17 +101,17 @@ const Footer = () => {
             <h5 className="text-white">Acerca de nosotros</h5>
             <ul className="nav flex-column mb-5">
               <li className="nav-item mb-1">
-                <a href="#" className="nav-link p-0 text-muted">
+                <a href="#" className="nav-link p-0  text-secondary">
                   Quiénes somos
                 </a>
               </li>
               <li className="nav-item mb-1">
-                <a href="#" className="nav-link p-0 text-muted">
+                <a href="#" className="nav-link p-0  text-secondary">
                   Nuestro equipo
                 </a>
               </li>
               <li className="nav-item mb-1">
-                <a href="#" className="nav-link p-0 text-muted">
+                <a href="#" className="nav-link p-0  text-secondary">
                   Carreras
                 </a>
               </li>
@@ -119,7 +119,7 @@ const Footer = () => {
           </div>
 
           <div class="d-flex flex-column flex-sm-row justify-content-center py-3  border-top">
-            <p className="text-muted">
+            <p className=" text-secondary">
               © 2023 Gatuna Matata. Todos los derechos reservados
             </p>
           </div>
