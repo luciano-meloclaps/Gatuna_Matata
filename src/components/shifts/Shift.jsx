@@ -1,4 +1,6 @@
+
 import React, { useEffect, useState } from 'react';
+
 import { useContext } from 'react';
 import Button from 'react-bootstrap/esm/Button';
 import Col from "react-bootstrap/Col";
@@ -12,11 +14,13 @@ import DateFixed from '../dateFixed/DateFixed';
 import { AuthenticationContext } from '../services/authentication/authentication.context';
 
 const Shift = ({ shifts, setShiftHandler }) => {
+
     const [showModal, setShowModal] = useState({}); // Objeto para manejar el estado de cada modal individualmente
     const [cat, setCat] = useState("");
     const [description, setDescription] = useState("");
     const [shiftsAvailable, setShiftsAvailable] = useState([]);
     const [shiftsTaken, setShiftsTaken] = useState([]);
+
 
     const { userData } = useContext(AuthenticationContext);
 
@@ -29,6 +33,7 @@ const Shift = ({ shifts, setShiftHandler }) => {
     };
 
     const handleClose = () => setShowModal({ ...showModal, current: null }); // Cierra el modal actual
+
 
     const handleShow = (shiftId) => setShowModal({ ...showModal, current: shiftId }); // Muestra el modal específico
 ////////////////////INTENTE HACER UN EFFECT PERO NO FUNCIONO, EL PROBLEMA ES EL USE STATE QUE SE QUEDA ATRASADO Y NO CARGA EL QUE ES SINO QUE CARGA UNO VIEJO////////////////
@@ -70,6 +75,7 @@ const Shift = ({ shifts, setShiftHandler }) => {
     useEffect(() => {
         const shiftsAvailableData = userData.userType === "sitter" ?
             shifts.filter(shift => shift.email === userData.email && shift.status === false).map((shift, index) => (
+
                 <tr key={shift.id}>
                     <th scope="row">{index}</th>
                     <td></td>
@@ -89,7 +95,10 @@ const Shift = ({ shifts, setShiftHandler }) => {
                             })
                             .catch((error) => {
                                 console.log(error);
-                            });
+                            })
+    
+                        ////////////////////////////////////////
+                        //Get
 
                         await fetch("http://localhost:8000/shifts", {
                             headers: {
@@ -223,6 +232,7 @@ const Shift = ({ shifts, setShiftHandler }) => {
         setShiftsTaken(shiftsTakenData);
 
     }, [shifts, showModal, setShiftHandler, userData.name]);
+
 
     return (
         <div className="m-5">

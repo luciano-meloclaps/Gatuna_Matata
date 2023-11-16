@@ -6,7 +6,6 @@ import Navbar from "../navbar/Navbar";
 import Footer from "../footer/Footer";
 import NewDate from "../newDate/NewDate";
 import Shift from "../shifts/Shift";
-import Shifts2 from "../shifts2/Shifts2";
 
 import useFetch from "../custom/useFetch/useFetch";
 
@@ -67,6 +66,21 @@ const Dashboard = () => {
         .catch((error) => {
           console.log(error);
         })
+
+      fetch("http://localhost:8000/shifts", {
+        headers: {
+          accept: "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((shiftData) => {
+          const shiftMapped = shiftData.map((shift) => ({
+            ...shift,
+            date: new Date(shift.date),
+          }))
+          setShiftHandler(shiftMapped); //Esta en el dashboard y cambia el valor a shift
+        })
+        .catch((error) => console.log(error))
     }
   }
 
@@ -87,9 +101,9 @@ const Dashboard = () => {
     <>
       <Navbar /> {/*Stateless*/}
 
-      {userData.userType === "sitter" && <NewDate addedShiftHandler={addedShiftHandler} /> }{/*agrega un nuevo turno */}
+      {userData.userType === "sitter" && <NewDate addedShiftHandler={addedShiftHandler} />}{/*agrega un nuevo turno */}
 
-      <Shift shifts={shifts} setShiftHandler={setShiftHandler}/> {/* Muestra los turnos */}
+      <Shift shifts={shifts} setShiftHandler={setShiftHandler} /> {/* Muestra los turnos */}
       <Footer /> {/*Stateless*/}
     </>
   );
