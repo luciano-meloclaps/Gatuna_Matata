@@ -7,13 +7,15 @@ const DateFixed = ({ date }) => {
     const month = date.toLocaleString("es-AR", { month: "long" });
     const day = date.toLocaleString("es-AR", { day: "2-digit" });
 
+    const dayFixed = Number(day) + 1 
+
     const { userData } = useContext(AuthenticationContext)
 
     if (userData.userType === "sitter" || userData.userType === "client") {
         return (
             <>
                 <td>
-                    {day}
+                    {dayFixed}
                 </td>
                 <td>
                     {month}
@@ -26,7 +28,7 @@ const DateFixed = ({ date }) => {
     } else {
         return (
             <div>
-                {day}{month}{year}
+                {dayFixed}{month}{year}
             </div>
         )
     }

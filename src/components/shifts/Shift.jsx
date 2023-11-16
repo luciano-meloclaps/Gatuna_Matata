@@ -86,7 +86,7 @@ const Shift = ({ shifts, setShiftHandler }) => {
             shifts.filter(shift => shift.status === false).map((shift, index) => (
                 <tr key={shift.id}>
                     <th scope="row">{index}</th>
-                    <td>{shift.status.toString()}</td>
+                    <td></td>
                     <DateFixed date={shift.date} />
                     <Button variant="success" onClick={() => handleShow(shift.id)}>
                         Reservar turno
@@ -94,7 +94,7 @@ const Shift = ({ shifts, setShiftHandler }) => {
 
                     <Modal show={showModal.current === shift.id} onHide={handleClose}>
                         <Modal.Header closeButton>
-                            <Modal.Title>Reserva para <DateFixed date={shift.date}/></Modal.Title>
+                            <Modal.Title>Reserva para <DateFixed date={shift.date} /></Modal.Title>
                         </Modal.Header>
                         <Form className='m-4'>
                             <Form.Group className="mb-3" controlId="formBasicCatName">
@@ -170,7 +170,7 @@ const Shift = ({ shifts, setShiftHandler }) => {
 
         setShiftsAvailable(shiftsAvailableData);
 
-        const shiftsTakenData = shifts.filter(shift => shift.email === userData.email && shift.status === true).map((shift, index) => (
+        const shiftsTakenData = userData.userType === "sitter" ? shifts.filter(shift => shift.email === userData.email && shift.status === true).map((shift, index) => (
             <tr key={shift.id}>
                 <th scope="row">{index}</th>
                 <td>{shift.shiftTakenBy}</td>
@@ -211,7 +211,48 @@ const Shift = ({ shifts, setShiftHandler }) => {
                         .catch((error) => console.log(error))
                 }}>Cancelar</Button>
             </tr>
-        ));
+        )) : shifts.filter(shift => shift.shiftTakenBy === userData.name && shift.status === true).map((shift, index) => (
+            <tr key={shift.id}>
+                <th scope="row">{index}</th>
+                <td>{shift.name}</td>
+                <td>{shift.clientAddres}</td>
+                <td>{shift.clienCat}</td>
+                <td>{shift.description}</td>
+                <DateFixed date={shift.date} />
+                <Button onClick={async () => {
+                    await fetch(`http://localhost:8000/shifts/${shift.id}`, {
+                        method: "DELETE",
+                        headers: {
+                            "content-type": "application/json",
+                        },
+                    })
+                        .then((response) => {
+                            if (response.ok) return response.json();
+                            else {
+                                throw new Error("The response has some errors!");
+                            }
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+
+                    await fetch("http://localhost:8000/shifts", {
+                        headers: {
+                            accept: "application/json",
+                        },
+                    })
+                        .then((response) => response.json())
+                        .then((shiftData) => {
+                            const shiftMapped = shiftData.map((shift) => ({
+                                ...shift,
+                                date: new Date(shift.date),
+                            }))
+                            setShiftHandler(shiftMapped);
+                        })
+                        .catch((error) => console.log(error))
+                }}>Cancelar</Button>
+            </tr>
+        ))
 
         setShiftsTaken(shiftsTakenData);
 
@@ -227,9 +268,9 @@ const Shift = ({ shifts, setShiftHandler }) => {
                             <Nav.Item>
                                 <Nav.Link eventKey="first">{userData.userType === "sitter" ? "Tu disponibilidad" : "Turnos disponibles"}</Nav.Link>
                             </Nav.Item>
-                            {userData.userType === "sitter" && <Nav.Item>
+                            <Nav.Item>
                                 <Nav.Link eventKey="second">Turnos reservados</Nav.Link>
-                            </Nav.Item>}
+                            </Nav.Item>
                             {userData.userType !== "sitter" && userData.userType !== "client" && <Nav.Item>
                                 <Nav.Link eventKey="tertiary" disabled>
                                     Gestion de usuarios
@@ -273,7 +314,7 @@ const Shift = ({ shifts, setShiftHandler }) => {
                                                 #
                                             </th>
                                             <th className="text-danger" scope="col">
-                                                Nombre de cliente
+                                                {userData.userType === "sitter" ? "Nombre del cliente" : "Nombre niñera"}
                                             </th>
                                             <th className="text-danger" scope="col">
                                                 Direccion
