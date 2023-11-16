@@ -559,7 +559,7 @@ const Shift = ({ shifts, setShiftHandler, usersInfo, setUsersInfoHandler }) => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {shiftsTaken.length === 0 ? "Todavia nadie reservo un turno, carga tu disponibilidad!!" : shiftsTaken}
+                                        {shiftsTaken.length === 0 ? "Ningun turno fue reservado! " : shiftsTaken}
                                     </tbody>
                                 </table>
                             </Tab.Pane>
