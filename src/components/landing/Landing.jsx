@@ -8,6 +8,7 @@ import Footer from "../footer/Footer";
 import FormComponent from "../fom/Form";
 import GridCardsUser from "../gridCards/GridCards";
 import BadRequest from "../badRequest/BadRequest";
+import Sitter from "../sitter/Sitter";
 
 const Landing = () => {
   /* async function fetchData() {
@@ -41,7 +42,8 @@ const Landing = () => {
     <>
       <Navbar />
       <Hero />
-      <GridCardsUser/>
+      <GridCardsUser />
+      <Sitter />
       <FormComponent />
       <Footer />
     </>
