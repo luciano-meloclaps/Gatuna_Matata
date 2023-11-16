@@ -13,26 +13,33 @@ import Form from 'react-bootstrap/Form';
 import DateFixed from '../dateFixed/DateFixed';
 import { AuthenticationContext } from '../services/authentication/authentication.context';
 
+// dataShift= []
 
 const Shift = ({ shifts, setShiftHandler }) => {
-    const [show, setShow] = useState(false);
-    const [cat, setCat] = useState("")
-    const [description, setDescription] = useState("")
-
-    const { userData } = useContext(AuthenticationContext) // Una variaable que trae tidis kis datis
-
+    const [showModal, setShowModal] = useState(null);
+    const [cat, setCat] = useState("");
+    const [description, setDescription] = useState("");
+  
+    const { userData } = useContext(AuthenticationContext);
+  
     const setCatHandlerOnChange = (event) => {
-        setCat(event.target.value)
-        console.log(cat)
-    }
-
+      setCat(event.target.value);
+      console.log(cat);
+    };
+  
     const setDescriptionHandlerOnChange = (event) => {
+      setDescription(event.target.value);
+    };
+  
+    const handleShow = (shiftId) => {
+      setShowModal({ [shiftId]: true });
+    };
+  
+    const handleClose = () => {
+      setShowModal(null);
+    };
         setDescription(event.target.value)
     }
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
     ////////////////////
 
     const shiftsAvailable = userData.userType === "sitter" ? shifts.filter(shift => shift.email === userData.email && shift.state === false).map((shift, index) => {
@@ -85,66 +92,116 @@ const Shift = ({ shifts, setShiftHandler }) => {
             <th scope="row">{index}</th>
             <td></td>
             <DateFixed date={shift.date} />
-            <Button variant="success" onClick={handleShow}>
-                Reservar turno
+            <Button
+              onClick={async () => {
+                await fetch(`http://localhost:8000/shifts/${shift.id}`, {
+                  method: "DELETE",
+                  headers: {
+                    "content-type": "application/json",
+                  },
+                })
+                  .then((response) => {
+                    if (response.ok) return response.json();
+                    else {
+                      throw new Error("The response has some errors!");
+                    }
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  });
+  
+                await fetch("http://localhost:8000/shifts", {
+                  headers: {
+                    accept: "application/json",
+                  },
+                })
+                  .then((response) => response.json())
+                  .then((shiftData) => {
+                    const shiftMapped = shiftData.map((shift) => ({
+                      ...shift,
+                      date: new Date(shift.date),
+                    }));
+                    setShiftHandler(shiftMapped);
+                  })
+                  .catch((error) => console.log(error));
+              }}
+            >
+              Cancelar
             </Button>
-
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Datos</Modal.Title>
-                </Modal.Header>
-                <Form>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Nombre de michi/s</Form.Label>
-                        <Form.Control type="email" placeholder="" onChange={setCatHandlerOnChange} />
-                    </Form.Group>
-
-                    <Form.Group className="mb-4 f" controlId="formBasicPassword">
-                        <Form.Label>Descripcion</Form.Label>
-                        <Form.Control type="text" placeholder="Descripcion" onChange={setDescriptionHandlerOnChange} />
-                        <Form.Text className="text-muted">
-                            Comida preferida, juguete preferido, caricia preferida, etc.
-                        </Form.Text>
-                    </Form.Group>
-                </Form>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Cerrar
-                    </Button>
-                    <Button variant="primary" onClick={async () => {
-                        const modifiedShift = {
-                            ...shift,
-                            status: true,
-                            shiftTakenBy: userData.name,
-                            clienCat: cat,
-                            description: description,
-                            //EWJEMPLO nombrwegato:nombreGato  que adquiri con un estado
-                            //Hay que setear un estado que escuche el onclick
-                        }
-                        try {
-                            const response = await fetch(`http://localhost:8000/shifts/${shift.id}`, {
-                                method: "PUT",
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                },
-                                body: JSON.stringify(modifiedShift),
-                                //aCA ESTAN SALIENDO LAS COsAs BIEN
-                            });
-                            if (response.ok) {
-                                console.log("holi, las cosas salieron bien");
-                            } else {
-                                throw new Error('holi las cosas salieron mal.');
-                            }
-                        } catch (error) {
-                            console.log(error);
-                        }
-                    }}>
-                        Guardar Datos
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-        </tr>)
-    })
+          </tr>
+        ))
+    ) : (
+      shifts.map((shift, index) => (
+        <tr key={shift.id}>
+          <DateFixed date={shift.date} />
+          <th scope="row">{index}</th>
+          <td></td>
+          <DateFixed date={shift.date} />
+          <Button variant="success" onClick={() => handleShow(shift.id)}>
+            Reservar turno
+          </Button>
+  
+          <Modal show={showModal && showModal[shift.id]} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Datos</Modal.Title>
+            </Modal.Header>
+            <Form>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Nombre de michi/s</Form.Label>
+                <Form.Control type="email" placeholder="" onChange={setCatHandlerOnChange} />
+              </Form.Group>
+  
+              <Form.Group className="mb-4 f" controlId="formBasicPassword">
+                <Form.Label>Descripcion</Form.Label>
+                <Form.Control type="text" placeholder="Descripcion" onChange={setDescriptionHandlerOnChange} />
+                <Form.Text className="text-muted">
+                  Comida preferida, juguete preferido, caricia preferida, etc.
+                </Form.Text>
+              </Form.Group>
+            </Form>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Cerrar
+              </Button>
+              <Button
+                variant="primary"
+                onClick={async () => {
+                  const modifiedShift = {
+                    ...shift,
+                    status: true,
+                    shiftTakenBy: userData.name,
+                    clienCat: cat,
+                    description: description,
+                  };
+  
+                  try {
+                    const response = await fetch(`http://localhost:8000/shifts/${shift.id}`, {
+                      method: "PUT",
+                      headers: {
+                        'Content-Type': 'application/json',
+                      },
+                      body: JSON.stringify(modifiedShift),
+                    });
+  
+                    if (response.ok) {
+                      console.log("holi, las cosas salieron bien");
+                    } else {
+                      throw new Error('holi las cosas salieron mal.');
+                    }
+                  } catch (error) {
+                    console.log(error);
+                  }
+  
+                  handleClose();
+                }}
+              >
+                Guardar Datos
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        </tr>
+      ))
+    );
 
     ///////////////////////////////////////////////////////////////////////
 
