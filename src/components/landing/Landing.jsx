@@ -7,6 +7,7 @@ import Navbar from "../navbar/Navbar";
 import Footer from "../footer/Footer";
 import FormComponent from "../fom/Form";
 import GridCardsUser from "../gridCards/GridCards";
+import BadRequest from "../badRequest/BadRequest";
 
 const Landing = () => {
   /* async function fetchData() {

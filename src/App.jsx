@@ -1,7 +1,4 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -10,22 +7,28 @@ import Login from "./components/login/Login";
 import Dashboard from "./components/dashboard/Dashboard";
 import Protected from "./components/protected/Protected";
 import Landing from "./components/landing/Landing";
-
-
+import BadRequest from "./components/badRequest/BadRequest";
 
 function App() {
-
   const router = createBrowserRouter([
     { path: "/", element: <Landing /> },
     {
       path: "/login",
-      element: <Login/>,
+      element: <Login />,
     },
     {
       path: "/dashboard",
       element: (
         <Protected>
-          <Dashboard/>
+          <Dashboard />
+        </Protected>
+      ),
+    },
+    {
+      path: "/error404",
+      element: (
+        <Protected>
+          <BadRequest />
         </Protected>
       ),
     },
