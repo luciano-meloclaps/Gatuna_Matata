@@ -77,18 +77,11 @@ const AddUser = ({ setUsersInfoHandler }) => {
     return (
         <div className="container col-md-3 bg-light p-5 bg-secondary-user rounded">
             <Form>
-                <h1 className="font-marca text-center color-accent-user p-2">
-                    Gatuna Matata
-                </h1>
-                <p className="text-center color-secondary-user">
-                    "miau miau miau miau miau miau"
-                </p>
-                <hr />
                 <Form.Group className="my-3" controlId="formBasicName">
                     <Form.Label>Nombre</Form.Label>
                     <Form.Control
                         type="text"
-                        placeholder="Ingrese su nombre"
+                        placeholder=""
                         onChange={onChangeNameHandler}
                     />
                 </Form.Group>
@@ -97,7 +90,7 @@ const AddUser = ({ setUsersInfoHandler }) => {
                     <Form.Label>Email</Form.Label>
                     <Form.Control
                         type="email"
-                        placeholder="michi@miau.com"
+                        placeholder=""
                         onChange={onChangeEmailHandler}
                     />
                 </Form.Group>
@@ -106,13 +99,12 @@ const AddUser = ({ setUsersInfoHandler }) => {
                     <Form.Label>Contraseña</Form.Label>
                     <Form.Control
                         type="password"
-                        placeholder="Ingrese su contraseña"
+                        placeholder=""
                         onChange={onChangePasswordHandler}
                     />
                 </Form.Group>
-                {/*hay que validar esto che AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */}
                 <Form.Group className="mb-3" controlId="formBasicUserType">
-                    <Form.Label>Quiero ser...</Form.Label>
+                    <Form.Label>Es...</Form.Label>
                     <Form.Select onChange={onChangeUserTypeHandler}>
                         <option>Elige una opción</option>
                         <option value="client">Cliente</option>
@@ -123,7 +115,7 @@ const AddUser = ({ setUsersInfoHandler }) => {
                 <div className="d-grid gap-2 ">
 
                     <Button
-                        size=" btn bg-secondary-user text-white btn-lg px-5 me-md-2 fw-bold bx-2 border-0"
+                       variant= "success"
                         onClick={onClickLogInHandler}
                     >
                         Registrar nuevo usuario
