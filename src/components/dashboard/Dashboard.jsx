@@ -32,7 +32,7 @@ const Dashboard = () => {
   };
 
   const addedShiftHandler = (ShiftData) => {
-    const dates = shifts.filter(shift => shift.email === userData.email).map(shift => shift.date.toISOString().slice(0, 10))
+    const dates = shifts.filter(shift => shift.email === userData.email).map(shift => shift.date.toISOString().slice(0, 10)) //AGARRA LOS PRIMEROS 10 DIGITOS DE LA FECHA Y LO PASA A STRING
 
     const dateString = ShiftData.date.toISOString().slice(0, 10);
 
