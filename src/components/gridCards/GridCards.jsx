@@ -12,9 +12,9 @@ const cards = [
   },
   {
     img: "src/images/imgProfileCats/imgCardMimi.jpg",
-    title: "Mimi",
+    title: "Mini",
     subtitle: "Camilo y Brenda",
-    text: "Mimi es una cliente fiel de Gatuna Matata 🤣, por eso se alegra y salta cada vez que se encuentra con su niñera.",
+    text: "Mini es una cliente fiel de Gatuna Matata 🤣, por eso se alegra y salta cada vez que se encuentra con su niñera.",
   },
   {
     img: "src/images/imgProfileCats/imgCardAkira.jpg",
