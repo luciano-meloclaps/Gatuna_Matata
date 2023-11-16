@@ -5,14 +5,13 @@ import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router";
 import { useContext } from "react";
 import { AuthenticationContext } from "../services/authentication/authentication.context";
-import GridCardsUser from "../gridCards/GridCards";
 
-import { HashLink } from 'react-router-hash-link';
+import { HashLink } from "react-router-hash-link";
 
 function NavScrollExample() {
   const navigateLogin = useNavigate();
 
-  const {handleLogout, userData} = useContext(AuthenticationContext)
+  const { handleLogout, userData } = useContext(AuthenticationContext);
 
   return (
     <Navbar
@@ -30,28 +29,41 @@ function NavScrollExample() {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <HashLink smooth to='/#gridcards' className="mx-2 text-white fs-5">Mascotas</HashLink>
+            <HashLink smooth to="/#gridcards" className="mx-2 text-white fs-5">
+              Mascotas
+            </HashLink>
             <Nav.Link className="mx-2 text-white fs-5" href="#action2">
               Niñeras
             </Nav.Link>
-            <HashLink smooth to='/#form' className="mx-2 text-white fs-5">Contacto</HashLink>
-            {userData && <Button variant="outline-light mx-4 lg btn-lg fw-bold" onClick={handleLogout}>
-              Cerrar sesión
-            </Button>}
-            {!userData &&
-            <Button
-              className="btn bg-secondary-user text-white btn-lg  me-md-2 fw-bold bx-2 border-0"
-              onClick={() => navigateLogin("/login")}
-            >
-              Iniciar sesión
-            </Button>};{" "}
-            {!userData &&
-            <Button
-              className="btn bg-secondary-user text-white btn-lg  me-md-2 fw-bold bx-2 border-0"
-              onClick={() => navigateLogin("/login")}
-            >
-              Registrarte
-            </Button>};{" "}
+            <HashLink smooth to="/#form" className="mx-2 text-white fs-5">
+              Contacto
+            </HashLink>
+            {userData && (
+              <Button
+                variant="outline-light mx-4 lg btn-lg fw-bold"
+                onClick={handleLogout}
+              >
+                Cerrar sesión
+              </Button>
+            )}
+            {!userData && (
+              <Button
+                className="btn bg-secondary-user text-white btn-lg  me-md-2 fw-bold bx-2 border-0"
+                onClick={() => navigateLogin("/login")}
+              >
+                Iniciar sesión
+              </Button>
+            )}
+            ;{""}
+            {!userData && (
+              <Button
+                className="btn bg-secondary-user text-white btn-lg  me-md-2 fw-bold bx-2 border-0"
+                onClick={() => navigateLogin("/login")}
+              >
+                Registrarte
+              </Button>
+            )}
+            ;{""}
           </Nav>
         </Navbar.Collapse>
       </Container>
