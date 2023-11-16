@@ -5,6 +5,9 @@ import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router";
 import { useContext } from "react";
 import { AuthenticationContext } from "../services/authentication/authentication.context";
+import GridCardsUser from "../gridCards/GridCards";
+
+import { HashLink } from 'react-router-hash-link';
 
 function NavScrollExample() {
   const navigateLogin = useNavigate();
@@ -27,15 +30,11 @@ function NavScrollExample() {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link className="mx-2 text-white fs-5" href="#action2">
-              Mascotas
-            </Nav.Link>
+            <HashLink smooth to='/#gridcards' className="mx-2 text-white fs-5">Mascotas</HashLink>
             <Nav.Link className="mx-2 text-white fs-5" href="#action2">
               Niñeras
             </Nav.Link>
-            <Nav.Link className="mx-2 text-white fs-5" href="#action2">
-              Contacto
-            </Nav.Link>
+            <HashLink smooth to='/#form' className="mx-2 text-white fs-5">Contacto</HashLink>
             {userData && <Button variant="outline-light mx-4 lg btn-lg fw-bold" onClick={handleLogout}>
               Cerrar sesión
             </Button>}

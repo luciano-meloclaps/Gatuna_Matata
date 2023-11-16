@@ -12,9 +12,9 @@ const cards = [
   },
   {
     img: "src/images/imgProfileCats/imgCardMimi.jpg",
-    title: "Mimi",
+    title: "Mini",
     subtitle: "Camilo y Brenda",
-    text: "Mimi es una cliente fiel de Gatuna Matata 🤣, por eso se alegra y  salta cada vez que se encunetra con su niñera",
+    text: "Mini es una cliente fiel de Gatuna Matata 🤣, por eso se alegra y  salta cada vez que se encunetra con su niñera",
   },
   {
     img: "src/images/imgProfileCats/imgCardAkira.jpg",
@@ -51,7 +51,7 @@ const cards = [
 function GridCardsUser() {
   return (
     /* Mapeamios las CARDS */
-    <div className="grid_container py-5 my-5 ">
+    <div className="grid_container py-5 my-5 " id='gridcards'>
       <h2 className="my-5 fs-1 color-accent-user font-tile text-center">
         Nuestros Clientes Satisfechos 😍{" "}
       </h2>
