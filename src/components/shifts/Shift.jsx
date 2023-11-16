@@ -18,9 +18,9 @@ const Shift = ({ shifts, setShiftHandler }) => {
     const [showModal, setShowModal] = useState({}); // Objeto para manejar el estado de cada modal individualmente
     const [cat, setCat] = useState("");
     const [description, setDescription] = useState("");
+    const [addres, setAddres] = useState("");
     const [shiftsAvailable, setShiftsAvailable] = useState([]);
     const [shiftsTaken, setShiftsTaken] = useState([]);
-
 
     const { userData } = useContext(AuthenticationContext);
 
@@ -32,46 +32,14 @@ const Shift = ({ shifts, setShiftHandler }) => {
         setDescription(event.target.value);
     };
 
+    const setAddresHandlerOnChange = (event) => {
+        setAddres(event.target.value);
+    }
+
     const handleClose = () => setShowModal({ ...showModal, current: null }); // Cierra el modal actual
 
-
     const handleShow = (shiftId) => setShowModal({ ...showModal, current: shiftId }); // Muestra el modal específico
-////////////////////INTENTE HACER UN EFFECT PERO NO FUNCIONO, EL PROBLEMA ES EL USE STATE QUE SE QUEDA ATRASADO Y NO CARGA EL QUE ES SINO QUE CARGA UNO VIEJO////////////////
-    useEffect(() => {
-        if (showModal.current !== null) {
-          const saveShiftData = async () => {
-            const modifiedShift = {
-              ...shift,
-              status: true,
-              shiftTakenBy: userData.name,
-              clienCat: cat,
-              description: description,
-            };
-    
-            try {
-              const response = await fetch(`http://localhost:8000/shifts/${shift.id}`, {
-                method: "PUT",
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(modifiedShift),
-              });
-    
-              if (response.ok) {
-                console.log("¡Las cosas salieron bien!");
-                handleClose();
-              } else {
-                throw new Error('¡Las cosas salieron mal!');
-              }
-            } catch (error) {
-              console.log(error);
-            }
-          };
-    
-          saveShiftData();
-        }
-      }, [showModal.current, cat, description]);
-////////////////////////////////////////////////////////////////////////////
+
     useEffect(() => {
         const shiftsAvailableData = userData.userType === "sitter" ?
             shifts.filter(shift => shift.email === userData.email && shift.status === false).map((shift, index) => (
@@ -96,10 +64,8 @@ const Shift = ({ shifts, setShiftHandler }) => {
                             .catch((error) => {
                                 console.log(error);
                             })
-    
                         ////////////////////////////////////////
                         //Get
-
                         await fetch("http://localhost:8000/shifts", {
                             headers: {
                                 accept: "application/json",
@@ -117,10 +83,10 @@ const Shift = ({ shifts, setShiftHandler }) => {
                     }}>Cancelar</Button>
                 </tr>
             )) :
-            shifts.map((shift, index) => (
+            shifts.filter(shift => shift.status === false).map((shift, index) => (
                 <tr key={shift.id}>
                     <th scope="row">{index}</th>
-                    <td></td>
+                    <td>{shift.status.toString()}</td>
                     <DateFixed date={shift.date} />
                     <Button variant="success" onClick={() => handleShow(shift.id)}>
                         Reservar turno
@@ -128,12 +94,17 @@ const Shift = ({ shifts, setShiftHandler }) => {
 
                     <Modal show={showModal.current === shift.id} onHide={handleClose}>
                         <Modal.Header closeButton>
-                            <Modal.Title>Datos</Modal.Title>
+                            <Modal.Title>Reserva para <DateFixed date={shift.date}/></Modal.Title>
                         </Modal.Header>
-                        <Form>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form className='m-4'>
+                            <Form.Group className="mb-3" controlId="formBasicCatName">
                                 <Form.Label>Nombre de michi/s</Form.Label>
-                                <Form.Control type="email" placeholder="" onChange={setCatHandlerOnChange} />
+                                <Form.Control type="text" placeholder="" onChange={setCatHandlerOnChange} />
+                            </Form.Group>
+
+                            <Form.Group className="mb-3" controlId="formBasicAddres">
+                                <Form.Label>Tu dirección</Form.Label>
+                                <Form.Control type="text" placeholder="" onChange={setAddresHandlerOnChange} />
                             </Form.Group>
 
                             <Form.Group className="mb-4 f" controlId="formBasicPassword">
@@ -149,36 +120,49 @@ const Shift = ({ shifts, setShiftHandler }) => {
                                 Cerrar
                             </Button>
                             <Button variant="primary" onClick={async () => {
-  const modifiedShift = {
-    ...shift,
-    status: true,
-    shiftTakenBy: userData.name,
-    clienCat: cat,
-    description: description,
-  };
+                                const modifiedShift = {
+                                    ...shift,
+                                    status: true,
+                                    shiftTakenBy: userData.name,
+                                    clientAddres: addres,
+                                    clienCat: cat,
+                                    description: description,
+                                };
 
-  try {
-    const response = await fetch(`http://localhost:8000/shifts/${shift.id}`, {
-      method: "PUT",
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(modifiedShift),
-    });
+                                try {
+                                    await fetch(`http://localhost:8000/shifts/${shift.id}`, {
+                                        method: "PUT",
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                        },
+                                        body: JSON.stringify(modifiedShift),
+                                    });
 
-    if (response.ok) {
-      console.log("holi, las cosas salieron bien");
-    } else {
-      throw new Error('holi las cosas salieron mal.');
-    }
-  } catch (error) {
-    console.log(error);
-  }
+                                    await fetch("http://localhost:8000/shifts", {
+                                        headers: {
+                                            accept: "application/json",
+                                        },
+                                    })
+                                        .then((response) => response.json())
+                                        .then((shiftData) => {
+                                            const shiftMapped = shiftData.map((shift) => ({
+                                                ...shift,
+                                                date: new Date(shift.date),
+                                            }))
+                                            setShiftHandler(shiftMapped);
+                                        })
+                                        .catch((error) => console.log(error))
 
-  handleClose();
-}}>
-  Guardar Datos
-</Button>
+                                } catch (error) {
+                                    console.log(error);
+                                }
+
+
+
+                                handleClose();
+                            }}>
+                                Guardar Datos
+                            </Button>
                         </Modal.Footer>
                     </Modal>
                 </tr>
@@ -189,10 +173,10 @@ const Shift = ({ shifts, setShiftHandler }) => {
         const shiftsTakenData = shifts.filter(shift => shift.email === userData.email && shift.status === true).map((shift, index) => (
             <tr key={shift.id}>
                 <th scope="row">{index}</th>
-                <td>{shift.name}</td>
                 <td>{shift.shiftTakenBy}</td>
-                <td>Una Direccion</td>
+                <td>{shift.clientAddres}</td>
                 <td>{shift.clienCat}</td>
+                <td>{shift.description}</td>
                 <DateFixed date={shift.date} />
                 <Button onClick={async () => {
                     await fetch(`http://localhost:8000/shifts/${shift.id}`, {
@@ -231,7 +215,7 @@ const Shift = ({ shifts, setShiftHandler }) => {
 
         setShiftsTaken(shiftsTakenData);
 
-    }, [shifts, showModal, setShiftHandler, userData.name]);
+    }, [shifts, showModal, userData.name, cat, description]);
 
 
     return (
@@ -289,16 +273,16 @@ const Shift = ({ shifts, setShiftHandler }) => {
                                                 #
                                             </th>
                                             <th className="text-danger" scope="col">
-                                                Nombre de niñera
-                                            </th>
-                                            <th className="text-danger" scope="col">
-                                                Cliente
+                                                Nombre de cliente
                                             </th>
                                             <th className="text-danger" scope="col">
                                                 Direccion
                                             </th>
                                             <th className="text-danger" scope="col">
                                                 Nombre del rufian
+                                            </th>
+                                            <th className="text-danger" scope="col">
+                                                Descripción
                                             </th>
                                             <th className="text-danger" scope="col">
                                                 Fecha
