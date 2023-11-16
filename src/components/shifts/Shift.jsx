@@ -38,12 +38,57 @@ const Shift = ({ shifts, setShiftHandler }) => {
     const handleClose = () => {
       setShowModal(null);
     };
-  
-    const shiftsAvailable = userData.userType === "sitter" ? (
-      shifts
-        .filter((shift) => shift.email === userData.email)
-        .map((shift, index) => (
-          <tr key={shift.id}>
+        setDescription(event.target.value)
+    }
+    ////////////////////
+
+    const shiftsAvailable = userData.userType === "sitter" ? shifts.filter(shift => shift.email === userData.email && shift.state === false).map((shift, index) => {
+        return (
+            <tr key={shift.id}>
+                <th scope="row">{index}</th>
+                <td></td>
+                <DateFixed date={shift.date} />
+                <Button onClick={async () => {
+                    await fetch(`http://localhost:8000/shifts/${shift.id}`, {
+                        method: "DELETE",
+                        headers: {
+                            "content-type": "application/json",
+                        },
+                    })
+                        .then((response) => {
+                            if (response.ok) return response.json();
+                            else {
+                                throw new Error("The response has some errors!");
+                            }
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        })
+
+                    ////////////////////////////////////////
+                    //Get
+                    await fetch("http://localhost:8000/shifts", {
+                        headers: {
+                            accept: "application/json",
+                        },
+                    })
+                        .then((response) => response.json())
+                        .then((shiftData) => {
+                            const shiftMapped = shiftData.map((shift) => ({
+                                ...shift,
+                                date: new Date(shift.date),
+                            }))
+                            setShiftHandler(shiftMapped); //Esta en el dashboard y cambia el valor a shift
+                        })
+                        .catch((error) => console.log(error))
+                }}>Cancelar</Button>
+            </tr>
+
+
+        )
+    }) : shifts.map((shift, index) => {
+        return (<tr>
+            <DateFixed date={shift.date} />
             <th scope="row">{index}</th>
             <td></td>
             <DateFixed date={shift.date} />
@@ -158,6 +203,55 @@ const Shift = ({ shifts, setShiftHandler }) => {
       ))
     );
 
+    ///////////////////////////////////////////////////////////////////////
+
+    const shiftsTaken = shifts.filter(shift => shift.email === userData.email && shift.status === true).map((shift, index) => {
+        return (
+            <tr key={shift.id}>
+                <th scope="row">{index}</th>
+                <td>{shift.name}</td>
+                <td>{shift.shiftTakenBy}</td>
+                <td>Una Direccion</td>
+                <td>{shift.clienCat}</td>
+                <DateFixed date={shift.date} />
+                <Button onClick={async () => {
+                    await fetch(`http://localhost:8000/shifts/${shift.id}`, {
+                        method: "DELETE",
+                        headers: {
+                            "content-type": "application/json",
+                        },
+                    })
+                        .then((response) => {
+                            if (response.ok) return response.json();
+                            else {
+                                throw new Error("The response has some errors!");
+                            }
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        })
+
+                    ////////////////////////////////////////
+                    //Get
+                    await fetch("http://localhost:8000/shifts", {
+                        headers: {
+                            accept: "application/json",
+                        },
+                    })
+                        .then((response) => response.json())
+                        .then((shiftData) => {
+                            const shiftMapped = shiftData.map((shift) => ({
+                                ...shift,
+                                date: new Date(shift.date),
+                            }))
+                            setShiftHandler(shiftMapped); //Esta en el dashboard y cambia el valor a shift
+                        })
+                        .catch((error) => console.log(error))
+                }}>Cancelar</Button>
+            </tr>
+        )
+    })
+
     return (
         <div className="m-5">
             <Tab.Container id="left-tabs-example" defaultActiveKey="first">
@@ -165,16 +259,16 @@ const Shift = ({ shifts, setShiftHandler }) => {
                     <Col sm={2}>
                         <Nav variant="pills" className="flex-column">
                             <Nav.Item>
-                                <Nav.Link eventKey="first">Tu disponibilidad</Nav.Link>
+                                <Nav.Link eventKey="first">{userData.userType === "sitter" ? "Tu disponibilidad" : "Turnos disponibles"}</Nav.Link>
                             </Nav.Item>
-                            <Nav.Item>
+                            {userData.userType === "sitter" && <Nav.Item>
                                 <Nav.Link eventKey="second">Turnos reservados</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
+                            </Nav.Item>}
+                            {userData.userType !== "sitter" && userData.userType !== "client" && <Nav.Item>
                                 <Nav.Link eventKey="tertiary" disabled>
                                     Gestion de usuarios
                                 </Nav.Link>
-                            </Nav.Item>
+                            </Nav.Item>}
                         </Nav>
                     </Col>
                     <Col sm={9}>
@@ -232,14 +326,7 @@ const Shift = ({ shifts, setShiftHandler }) => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
+                                        {shiftsTaken.length === 0 ? "Todavia nadie reservo un turno, carga tu disponibilidad!!" : shiftsTaken}
                                     </tbody>
                                 </table>
                             </Tab.Pane>

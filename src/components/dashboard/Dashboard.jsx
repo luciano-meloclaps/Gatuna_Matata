@@ -87,7 +87,7 @@ const Dashboard = () => {
     <>
       <Navbar /> {/*Stateless*/}
 
-      <NewDate addedShiftHandler={addedShiftHandler} /> {/*agrega un nuevo turno */}
+      {userData.userType === "sitter" && <NewDate addedShiftHandler={addedShiftHandler} /> }{/*agrega un nuevo turno */}
 
       <Shift shifts={shifts} setShiftHandler={setShiftHandler}/> {/* Muestra los turnos */}
       <Footer /> {/*Stateless*/}

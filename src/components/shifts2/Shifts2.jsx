@@ -6,8 +6,7 @@ import Button from "react-bootstrap/esm/Button";
 import DateFixed from "../dateFixed/DateFixed";
 
 const Shifts2 = ({ shifts }) => {
-
-  console.log(shifts)
+  console.log(shifts);
 
   return (
     <>
@@ -59,10 +58,10 @@ const Shifts2 = ({ shifts }) => {
                           <tr>
                             <th scope="row">{index}</th>
                             <td></td>
-                            <DateFixed date={shift.date}/>
+                            <DateFixed date={shift.date} />
                             <Button>Cancelar</Button>
                           </tr>
-                        )
+                        );
                       })}
                     </tbody>
                   </table>
