@@ -12,6 +12,7 @@ import Form from 'react-bootstrap/Form';
 
 import DateFixed from '../dateFixed/DateFixed';
 import { AuthenticationContext } from '../services/authentication/authentication.context';
+import AddUser from '../addUser/AddUser';
 
 const Shift = ({ shifts, setShiftHandler, usersInfo, setUsersInfoHandler }) => {
 
@@ -22,6 +23,10 @@ const Shift = ({ shifts, setShiftHandler, usersInfo, setUsersInfoHandler }) => {
     const [addres, setAddres] = useState("");
     const [shiftsAvailable, setShiftsAvailable] = useState([]);
     const [shiftsTaken, setShiftsTaken] = useState([]);
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [userType, setUserType] = useState("");
+    const [toggle, setToggle] = useState("");
 
     const { userData } = useContext(AuthenticationContext);
 
@@ -35,6 +40,22 @@ const Shift = ({ shifts, setShiftHandler, usersInfo, setUsersInfoHandler }) => {
 
     const setAddresHandlerOnChange = (event) => {
         setAddres(event.target.value);
+    }
+
+    const onChangeName = (event) => {
+        setName(event.target.value)
+    }
+
+    const onChangeEmail = (event) => {
+        setEmail(event.target.value);
+    }
+
+    const onChangeUserType = (event) => {
+        setUserType(event.target.value)
+    }
+
+    const setToggleHandler = (value) => {
+        setToggle(value)
     }
 
     const handleClose = () => setShowModal({ ...showModal, current: null }); // Cierra el modal actual
@@ -386,15 +407,88 @@ const Shift = ({ shifts, setShiftHandler, usersInfo, setUsersInfoHandler }) => {
                     .then((data) => setUsersInfoHandler(data))
                     .catch((error) => console.log(error))
             }}>Eliminar usuario</Button>
+            <Button onClick={() => {
+                setName(user.name);
+                setEmail(user.email);
+                setUserType(user.userType);
+                handleShow(user.id)}}>Editar</Button>
+
+            <Modal show={showModal.current === user.id} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Reserva para</Modal.Title>
+                </Modal.Header>
+                <Form className='m-4'>
+                    <Form.Group className="mb-3" controlId="formBasicUserName">
+                        <Form.Label>Nombre de user</Form.Label>
+                        <Form.Control type="text" defaultValue={user.name} onChange={onChangeName} />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="formUserType">
+                        <Form.Label>Tipo de user</Form.Label>
+                        <Form.Control type="text" defaultValue={user.userType} placeholder="" onChange={onChangeUserType} />
+                    </Form.Group>
+
+                    <Form.Group className="mb-4 f" controlId="formEmail">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control type="text" defaultValue={user.email} placeholder="Descripcion" onChange={onChangeEmail} />
+                    </Form.Group>
+                </Form>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Cerrar
+                    </Button>
+                    <Button variant="primary" onClick={async () => {
+                        const modifiedUser = {
+                            ...user,
+                            name: name,
+                            userType: userType,
+                            email: email,
+                        };
+
+                        try {
+                            await fetch(`http://localhost:8000/users/${user.id}`, {
+                                method: "PUT",
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify(modifiedUser),
+                            });
+
+                            await fetch("http://localhost:8000/users", {
+                                headers: {
+                                    accept: "application/json",
+                                },
+                            })
+                                .then((response) => response.json())
+                                .then((userData) => {
+                                    setUsersInfoHandler(userData)
+                                })
+                                .catch((error) => console.log(error))
+
+                        } catch (error) {
+                            console.log(error);
+                        }
+                        setName("");
+                        setEmail("");
+                        setUserType("");
+                        handleClose();
+                    }}>
+                        Guardar Datos
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
         </tr>)
 
         setUsersInformation(usersMapped)
 
-    }, [shifts, showModal, userData.name, cat, description, usersInfo]);
+    }, [shifts, showModal, userData.name, cat, description, usersInfo, name, email, userType, toggle]);
 
 
     return (
         <div className="m-5 vh-100">
+            {userData.userType === "SYS_Admin" && <AddUser setUsersInfoHandler={setUsersInfoHandler}/>}
+
             <Tab.Container id="left-tabs-example" defaultActiveKey="first">
                 <Row>
                     <Col sm={2}>
