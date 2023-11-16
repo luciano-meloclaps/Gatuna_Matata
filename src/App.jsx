@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -25,13 +25,13 @@ function App() {
       ),
     },
     {
-      path: "/error404",
-      element: (
-        <Protected>
-          <BadRequest />
-        </Protected>
-      ),
+      path: "/404",
+      element: <BadRequest />,
     },
+    {
+      path: "*",
+      element: <Navigate to="/404"/>
+    }
   ]);
 
   return <RouterProvider router={router} />;
