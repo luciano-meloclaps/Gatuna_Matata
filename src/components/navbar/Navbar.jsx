@@ -5,7 +5,6 @@ import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router";
 import { useContext } from "react";
 import { AuthenticationContext } from "../services/authentication/authentication.context";
-import GridCardsUser from "../gridCards/GridCards";
 
 import { HashLink } from 'react-router-hash-link';
 
