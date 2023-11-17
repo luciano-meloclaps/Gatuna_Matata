@@ -66,7 +66,7 @@ function NavScrollExample() {
                 Iniciar sesión
               </Button>
             )}
-            ;{""}
+            {""}
             {!userData && (
               <Button
                 variant="outline-light lg btn-lg fw-bold"
@@ -75,7 +75,7 @@ function NavScrollExample() {
                 Registrarte
               </Button>
             )}
-            ;{""}
+            {""}
           </Nav>
         </Navbar.Collapse>
       </Container>
