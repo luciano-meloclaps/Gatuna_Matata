@@ -1,13 +1,13 @@
 import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import "./BadRequest.css"; // Asegúrate de crear este archivo CSS en la misma carpeta
+/*import "./BadRequest.css";dsd */
 
 const Error400 = () => {
   return (
     <Container className="error-container">
       <Row className="justify-content-md-center">
         <Col md="auto" className="text-white">
-          <h1>Error 400: ¡Maullido incorrecto!</h1>
+          <h1>Error 404: ¡Maullido incorrecto!</h1>
           <p>
             ¡Parece que tu gato ha caminado sobre el teclado otra vez! ¿Por qué
             no intentas de nuevo o vuelves a la página principal?

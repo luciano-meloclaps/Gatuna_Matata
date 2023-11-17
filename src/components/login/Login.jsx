@@ -20,7 +20,7 @@ const Login = () => {
 
   const { handleLogin } = useContext(AuthenticationContext)
 
-  const { data } = useFetch("http://localhost:8000/users")
+  const { data } = useFetch("https://gatunamatataapi.onrender.com/users")
   
 
   ////LOGIN FORM///////
@@ -59,7 +59,7 @@ const Login = () => {
         return;
       }
       else {
-        fetch("http://localhost:8000/users", {
+        fetch("https://gatunamatataapi.onrender.com/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -100,6 +100,7 @@ const Login = () => {
 
     }
   };
+  
   return (
     <div className="vh-100 d-flex align-items-center background">
       <div className="container col-md-3 bg-light p-5  bg-secondary-user rounded">
