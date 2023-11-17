@@ -4,7 +4,7 @@ function CardUser({ img, title, subtitle, text }) {
   return (
     <Card
       className="shadow-lg rounded-4 mb-5  p-4 d-flex flex-column"
-      style={{ maxWidth: "24rem", height: "95%" }}
+      style={{ maxWidth: "24rem", height: "90%" }}
     >
       <Card.Img
         variant="top"

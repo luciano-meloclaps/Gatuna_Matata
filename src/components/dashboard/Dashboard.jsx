@@ -25,7 +25,7 @@ const Dashboard = () => {
 
   const { userData } = useContext(AuthenticationContext);
 
-  const { data, loading } = useFetch("http://localhost:8000/shifts");
+  const { data, loading } = useFetch("https://gatunamatataapi.onrender.com/shifts");
 
   const setShiftHandler = (value) => {
     setShifts(value);
@@ -45,7 +45,7 @@ const Dashboard = () => {
     if (dates.includes(ShiftData.date.toISOString().slice(0, 10))) {
       alert("ejem, ejem")
     } else {
-      fetch("http://localhost:8000/shifts", { //el post más largo que hice en mi vida
+      fetch("https://gatunamatataapi.onrender.com/shifts", { //el post más largo que hice en mi vida
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -72,7 +72,7 @@ const Dashboard = () => {
           console.log(error);
         })
 
-      fetch("http://localhost:8000/shifts", {
+      fetch("https://gatunamatataapi.onrender.com/shifts", {
         headers: {
           accept: "application/json",
         },
@@ -101,7 +101,7 @@ const Dashboard = () => {
   }, [data, loading]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/users", {
+    fetch("https://gatunamatataapi.onrender.com/users", {
         headers: {
             accept: "application/json",
         },
