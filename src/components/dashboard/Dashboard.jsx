@@ -21,7 +21,7 @@ function shiftsDateMapped(shifts) {
 
 const Dashboard = () => {
   const [shifts, setShifts] = useState([]);
-  const [usersInfo, setUsersInfo] = useState([]); 
+  const [usersInfo, setUsersInfo] = useState([]);
 
   const { userData } = useContext(AuthenticationContext);
 
@@ -35,7 +35,7 @@ const Dashboard = () => {
     setUsersInfo(value);
   }
 
-  const addedShiftHandler = (ShiftData) => {
+  const addedShiftHandler = async (ShiftData) => {
     const dates = shifts.filter(shift => shift.email === userData.email).map(shift => shift.date.toISOString().slice(0, 10)) //AGARRA LOS PRIMEROS 10 DIGITOS DE LA FECHA Y LO PASA A STRING
 
     const dateString = ShiftData.date.toISOString().slice(0, 10);
@@ -45,7 +45,7 @@ const Dashboard = () => {
     if (dates.includes(ShiftData.date.toISOString().slice(0, 10))) {
       alert("ejem, ejem")
     } else {
-      fetch("https://gatunamatataapi.onrender.com/shifts", { //el post más largo que hice en mi vida
+      await fetch("https://gatunamatataapi.onrender.com/shifts", { //el post más largo que hice en mi vida
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -72,7 +72,7 @@ const Dashboard = () => {
           console.log(error);
         })
 
-      fetch("https://gatunamatataapi.onrender.com/shifts", {
+      await fetch("https://gatunamatataapi.onrender.com/shifts", {
         headers: {
           accept: "application/json",
         },
@@ -102,13 +102,13 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetch("https://gatunamatataapi.onrender.com/users", {
-        headers: {
-            accept: "application/json",
-        },
+      headers: {
+        accept: "application/json",
+      },
     })
-        .then((response) => response.json())
-        .then((data) => setUsersInfo(data))
-}, [])
+      .then((response) => response.json())
+      .then((data) => setUsersInfo(data))
+  }, [])
 
 
   return (
@@ -117,7 +117,7 @@ const Dashboard = () => {
 
       {userData.userType === "sitter" && <NewDate addedShiftHandler={addedShiftHandler} />}{/*agrega un nuevo turno */}
 
-      <Shift shifts={shifts} setShiftHandler={setShiftHandler} usersInfo={usersInfo} setUsersInfoHandler={setUsersInfoHandler}/> {/* Muestra los turnos */}
+      <Shift shifts={shifts} setShiftHandler={setShiftHandler} usersInfo={usersInfo} setUsersInfoHandler={setUsersInfoHandler} /> {/* Muestra los turnos */}
       <Footer /> {/*Stateless*/}
     </>
   );

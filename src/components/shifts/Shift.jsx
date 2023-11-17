@@ -130,7 +130,7 @@ const Shift = ({ shifts, setShiftHandler, usersInfo, setUsersInfoHandler }) => {
                                 .catch((error) => {
                                     console.log(error);
                                 })
-                            ////////////////////////////////////////
+                            ///////////////////////////////////////
                             //Get
                             await fetch("https://gatunamatataapi.onrender.com/shifts", {
                                 headers: {
