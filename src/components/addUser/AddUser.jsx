@@ -36,7 +36,7 @@ const AddUser = ({ setUsersInfoHandler }) => {
             return;
         }
         else {
-            await fetch("http://localhost:8000/users", {
+            await fetch("https://gatunamatataapi.onrender.com/users", {
                 method: "POST",
                 headers: {
                     "content-type": "application/json",
@@ -59,7 +59,7 @@ const AddUser = ({ setUsersInfoHandler }) => {
                     console.log(error);
                 })
 
-            await fetch("http://localhost:8000/users", {
+            await fetch("https://gatunamatataapi.onrender.com/users", {
                 headers: {
                     accept: "application/json",
                 },

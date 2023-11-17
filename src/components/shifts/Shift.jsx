@@ -71,7 +71,7 @@ const Shift = ({ shifts, setShiftHandler, usersInfo, setUsersInfoHandler }) => {
                     <td></td>
                     <DateFixed date={shift.date} />
                     <Button onClick={async () => {
-                        await fetch(`http://localhost:8000/shifts/${shift.id}`, {
+                        await fetch(`https://gatunamatataapi.onrender.com/shifts/${shift.id}`, {
                             method: "DELETE",
                             headers: {
                                 "content-type": "application/json",
@@ -88,7 +88,7 @@ const Shift = ({ shifts, setShiftHandler, usersInfo, setUsersInfoHandler }) => {
                             })
                         ////////////////////////////////////////
                         //Get
-                        await fetch("http://localhost:8000/shifts", {
+                        await fetch("https://gatunamatataapi.onrender.com/shifts", {
                             headers: {
                                 accept: "application/json",
                             },
@@ -115,7 +115,7 @@ const Shift = ({ shifts, setShiftHandler, usersInfo, setUsersInfoHandler }) => {
                         <td></td>
                         <DateFixed date={shift.date} />
                         <Button onClick={async () => {
-                            await fetch(`http://localhost:8000/shifts/${shift.id}`, {
+                            await fetch(`https://gatunamatataapi.onrender.com/shifts/${shift.id}`, {
                                 method: "DELETE",
                                 headers: {
                                     "content-type": "application/json",
@@ -132,7 +132,7 @@ const Shift = ({ shifts, setShiftHandler, usersInfo, setUsersInfoHandler }) => {
                                 })
                             ////////////////////////////////////////
                             //Get
-                            await fetch("http://localhost:8000/shifts", {
+                            await fetch("https://gatunamatataapi.onrender.com/shifts", {
                                 headers: {
                                     accept: "application/json",
                                 },
@@ -196,7 +196,7 @@ const Shift = ({ shifts, setShiftHandler, usersInfo, setUsersInfoHandler }) => {
                                     };
 
                                     try {
-                                        await fetch(`http://localhost:8000/shifts/${shift.id}`, {
+                                        await fetch(`https://gatunamatataapi.onrender.com/shifts/${shift.id}`, {
                                             method: "PUT",
                                             headers: {
                                                 'Content-Type': 'application/json',
@@ -204,7 +204,7 @@ const Shift = ({ shifts, setShiftHandler, usersInfo, setUsersInfoHandler }) => {
                                             body: JSON.stringify(modifiedShift),
                                         });
 
-                                        await fetch("http://localhost:8000/shifts", {
+                                        await fetch("https://gatunamatataapi.onrender.com/shifts", {
                                             headers: {
                                                 accept: "application/json",
                                             },
@@ -248,7 +248,7 @@ const Shift = ({ shifts, setShiftHandler, usersInfo, setUsersInfoHandler }) => {
                     <td>{shift.description}</td>
                     <DateFixed date={shift.date} />
                     <Button onClick={async () => {
-                        await fetch(`http://localhost:8000/shifts/${shift.id}`, {
+                        await fetch(`https://gatunamatataapi.onrender.com/shifts/${shift.id}`, {
                             method: "DELETE",
                             headers: {
                                 "content-type": "application/json",
@@ -264,7 +264,7 @@ const Shift = ({ shifts, setShiftHandler, usersInfo, setUsersInfoHandler }) => {
                                 console.log(error);
                             });
 
-                        await fetch("http://localhost:8000/shifts", {
+                        await fetch("https://gatunamatataapi.onrender.com/shifts", {
                             headers: {
                                 accept: "application/json",
                             },
@@ -294,7 +294,7 @@ const Shift = ({ shifts, setShiftHandler, usersInfo, setUsersInfoHandler }) => {
                     <td>{shift.description}</td>
                     <DateFixed date={shift.date} />
                     <Button onClick={async () => {
-                        await fetch(`http://localhost:8000/shifts/${shift.id}`, {
+                        await fetch(`https://gatunamatataapi.onrender.com/shifts/${shift.id}`, {
                             method: "DELETE",
                             headers: {
                                 "content-type": "application/json",
@@ -310,7 +310,7 @@ const Shift = ({ shifts, setShiftHandler, usersInfo, setUsersInfoHandler }) => {
                                 console.log(error);
                             });
 
-                        await fetch("http://localhost:8000/shifts", {
+                        await fetch("https://gatunamatataapi.onrender.com/shifts", {
                             headers: {
                                 accept: "application/json",
                             },
@@ -335,7 +335,7 @@ const Shift = ({ shifts, setShiftHandler, usersInfo, setUsersInfoHandler }) => {
                     <td>{shift.description}</td>
                     <DateFixed date={shift.date} />
                     <Button onClick={async () => {
-                        await fetch(`http://localhost:8000/shifts/${shift.id}`, {
+                        await fetch(`https://gatunamatataapi.onrender.com/shifts/${shift.id}`, {
                             method: "DELETE",
                             headers: {
                                 "content-type": "application/json",
@@ -351,7 +351,7 @@ const Shift = ({ shifts, setShiftHandler, usersInfo, setUsersInfoHandler }) => {
                                 console.log(error);
                             });
 
-                        await fetch("http://localhost:8000/shifts", {
+                        await fetch("https://gatunamatataapi.onrender.com/shifts", {
                             headers: {
                                 accept: "application/json",
                             },
@@ -382,7 +382,7 @@ const Shift = ({ shifts, setShiftHandler, usersInfo, setUsersInfoHandler }) => {
             <td>{user.userType}</td>
             <td>{user.email}</td>
             <Button onClick={async () => {
-                await fetch(`http://localhost:8000/users/${user.id}`, {
+                await fetch(`https://gatunamatataapi.onrender.com/users/${user.id}`, {
                     method: "DELETE",
                     headers: {
                         "content-type": "application/json",
@@ -398,7 +398,7 @@ const Shift = ({ shifts, setShiftHandler, usersInfo, setUsersInfoHandler }) => {
                         console.log(error);
                     });
 
-                await fetch("http://localhost:8000/users", {
+                await fetch("https://gatunamatataapi.onrender.com/users", {
                     headers: {
                         accept: "application/json",
                     },
@@ -446,7 +446,7 @@ const Shift = ({ shifts, setShiftHandler, usersInfo, setUsersInfoHandler }) => {
                         };
 
                         try {
-                            await fetch(`http://localhost:8000/users/${user.id}`, {
+                            await fetch(`https://gatunamatataapi.onrender.com/users/${user.id}`, {
                                 method: "PUT",
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -454,7 +454,7 @@ const Shift = ({ shifts, setShiftHandler, usersInfo, setUsersInfoHandler }) => {
                                 body: JSON.stringify(modifiedUser),
                             });
 
-                            await fetch("http://localhost:8000/users", {
+                            await fetch("https://gatunamatataapi.onrender.com/users", {
                                 headers: {
                                     accept: "application/json",
                                 },
