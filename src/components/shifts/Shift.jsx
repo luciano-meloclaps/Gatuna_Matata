@@ -1,14 +1,14 @@
+import React, { useEffect, useState } from "react";
 
-import React, { useEffect, useState } from 'react';
-
-import { useContext } from 'react';
-import Button from 'react-bootstrap/esm/Button';
+import { useContext } from "react";
+import Button from "react-bootstrap/esm/Button";
 import Col from "react-bootstrap/Col";
 import Nav from "react-bootstrap/Nav";
 import Row from "react-bootstrap/Row";
 import Tab from "react-bootstrap/Tab";
-import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
+import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap/Form";
+
 
 import DateFixed from '../dateFixed/DateFixed';
 import { AuthenticationContext } from '../services/authentication/authentication.context';
@@ -92,18 +92,15 @@ const Shift = ({ shifts, setShiftHandler, usersInfo, setUsersInfoHandler }) => {
                             headers: {
                                 accept: "application/json",
                             },
+
                         })
-                            .then((response) => response.json())
-                            .then((shiftData) => {
-                                const shiftMapped = shiftData.map((shift) => ({
-                                    ...shift,
-                                    date: new Date(shift.date),
-                                }));
-                                setShiftHandler(shiftMapped);
-                            })
-                            .catch((error) => console.log(error));
-                    }}>Cancelar</Button>
+                        .catch((error) => console.log(error));
+                    }}
+                  >
+                    Cancelar
+                  </Button>
                 </tr>
+
             ))
             setShiftsAvailable(shiftsAvailableData);
         } else {
@@ -133,9 +130,11 @@ const Shift = ({ shifts, setShiftHandler, usersInfo, setUsersInfoHandler }) => {
                             ///////////////////////////////////////
                             //Get
                             await fetch("https://gatunamatataapi.onrender.com/shifts", {
+
                                 headers: {
-                                    accept: "application/json",
+                                  "Content-Type": "application/json",
                                 },
+
                             })
                                 .then((response) => response.json())
                                 .then((shiftData) => {
@@ -266,26 +265,97 @@ const Shift = ({ shifts, setShiftHandler, usersInfo, setUsersInfoHandler }) => {
 
                         await fetch("https://gatunamatataapi.onrender.com/shifts", {
                             headers: {
-                                accept: "application/json",
-                            },
-                        })
-                            .then((response) => response.json())
-                            .then((shiftData) => {
-                                const shiftMapped = shiftData.map((shift) => ({
-                                    ...shift,
-                                    date: new Date(shift.date),
-                                }))
-                                setShiftHandler(shiftMapped);
-                            })
-                            .catch((error) => console.log(error))
-                    }}>Cancelar</Button>
-                </tr>
-            ))
 
-            setShiftsTaken(shiftsTakenData);
-        }
-        else {
-            const shiftsTakenData = userData.userType === "sitter" ? shifts.filter(shift => shift.email === userData.email && shift.status === true).map((shift, index) => (
+                                accept: "application/json",
+                              },
+                            })
+                              .then((response) => response.json())
+                              .then((shiftData) => {
+                                const shiftMapped = shiftData.map((shift) => ({
+                                  ...shift,
+                                  date: new Date(shift.date),
+                                }));
+                                setShiftHandler(shiftMapped);
+                              })
+                              .catch((error) => console.log(error));
+                          } catch (error) {
+                            console.log(error);
+                          }
+
+                          handleClose();
+                        }}
+                      >
+                        Guardar Datos
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
+                </tr>
+              ));
+      setShiftsAvailable(shiftsAvailableData);
+    }
+
+    /////////////////////////////////////////////////////////////
+
+    if (userData.userType === "SYS_Admin") {
+      const shiftsTakenData = shifts
+        .filter((shift) => shift.status === true)
+        .map((shift, index) => (
+          <tr key={shift.id}>
+            <th scope="row">{index}</th>
+            <td>{shift.name}</td>
+            <td>{shift.clientAddres}</td>
+            <td>{shift.shiftTakenBy}</td>
+            <td>{shift.description}</td>
+            <DateFixed date={shift.date} />
+            <Button
+              onClick={async () => {
+                await fetch(`http://localhost:8000/shifts/${shift.id}`, {
+                  method: "DELETE",
+                  headers: {
+                    "content-type": "application/json",
+                  },
+                })
+                  .then((response) => {
+                    if (response.ok) return response.json();
+                    else {
+                      throw new Error("The response has some errors!");
+                    }
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  });
+
+                await fetch("http://localhost:8000/shifts", {
+                  headers: {
+                    accept: "application/json",
+                  },
+                })
+                  .then((response) => response.json())
+                  .then((shiftData) => {
+                    const shiftMapped = shiftData.map((shift) => ({
+                      ...shift,
+                      date: new Date(shift.date),
+                    }));
+                    setShiftHandler(shiftMapped);
+                  })
+                  .catch((error) => console.log(error));
+              }}
+            >
+              Cancelar
+            </Button>
+          </tr>
+        ));
+
+      setShiftsTaken(shiftsTakenData);
+    } else {
+      const shiftsTakenData =
+        userData.userType === "sitter"
+          ? shifts
+              .filter(
+                (shift) =>
+                  shift.email === userData.email && shift.status === true
+              )
+              .map((shift, index) => (
                 <tr key={shift.id}>
                     <th scope="row">{index}</th>
                     <td>{shift.shiftTakenBy}</td>
@@ -314,19 +384,21 @@ const Shift = ({ shifts, setShiftHandler, usersInfo, setUsersInfoHandler }) => {
                             headers: {
                                 accept: "application/json",
                             },
+
                         })
-                            .then((response) => response.json())
-                            .then((shiftData) => {
-                                const shiftMapped = shiftData.map((shift) => ({
-                                    ...shift,
-                                    date: new Date(shift.date),
-                                }))
-                                setShiftHandler(shiftMapped);
-                            })
-                            .catch((error) => console.log(error))
-                    }}>Cancelar</Button>
+                        .catch((error) => console.log(error));
+                    }}
+                  >
+                    Cancelar
+                  </Button>
                 </tr>
-            )) : shifts.filter(shift => shift.shiftTakenBy === userData.name && shift.status === true).map((shift, index) => (
+              ))
+          : shifts
+              .filter(
+                (shift) =>
+                  shift.shiftTakenBy === userData.name && shift.status === true
+              )
+              .map((shift, index) => (
                 <tr key={shift.id}>
                     <th scope="row">{index}</th>
                     <td>{shift.name}</td>
@@ -355,23 +427,18 @@ const Shift = ({ shifts, setShiftHandler, usersInfo, setUsersInfoHandler }) => {
                             headers: {
                                 accept: "application/json",
                             },
+
                         })
-                            .then((response) => response.json())
-                            .then((shiftData) => {
-                                const shiftMapped = shiftData.map((shift) => ({
-                                    ...shift,
-                                    date: new Date(shift.date),
-                                }))
-                                setShiftHandler(shiftMapped);
-                            })
-                            .catch((error) => console.log(error))
-                    }}>Cancelar</Button>
+                        .catch((error) => console.log(error));
+                    }}
+                  >
+                    Cancelar
+                  </Button>
                 </tr>
-            ))
+              ));
 
-            setShiftsTaken(shiftsTakenData);
-        }
-
+      setShiftsTaken(shiftsTakenData);
+    }
 
 
         /////////////////////////////////////////////////////////////////////
