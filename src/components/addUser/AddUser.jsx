@@ -31,7 +31,7 @@ const AddUser = ({ setUsersInfoHandler }) => {
         event.preventDefault();
 
         if (email.length === 0 || password.length === 0) {
-            //CAMBIAR VALIDACIONES
+            //
             alert("Usuario inválido para registrarlo");
             return;
         }
